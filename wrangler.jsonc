@@ -2,7 +2,9 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "server",
   "compatibility_date": "2026-05-22",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "main": "./worker/index.ts",
   "assets": {
     "binding": "ASSETS",
@@ -17,16 +19,30 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "site-creator-d1",
-      "database_id": "00000000-0000-4000-8000-000000000000",
+      "database_name": "sanskar-school-db",
+      "database_id": "a86af277-2236-4055-9f61-8bc51c3ea5ad",
       "migrations_dir": "./drizzle"
     }
   ],
   "r2_buckets": [
     {
       "binding": "FILES",
-      "bucket_name": "site-creator-r2"
+      "bucket_name": "sanskar-school-media"
     }
   ],
-  "observability": { "enabled": true, "head_sampling_rate": 0.1 }
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1
+  },
+  "account_id": "6278b9fd133db5295e7a2bebfc1ec737",
+  "routes": [
+    {
+      "custom_domain": true,
+      "pattern": "sanskarschools.com"
+    },
+    {
+      "custom_domain": true,
+      "pattern": "www.sanskarschools.com"
+    }
+  ]
 }

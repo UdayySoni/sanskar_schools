@@ -1,6 +1,6 @@
 # Sanskar Public School deployment
 
-This is an integrated React/Vite + Cloudflare Worker application. Keep bindings `DB` (D1), `FILES` (R2), and `ASSETS`. Content changes are stored in D1/R2 and are available on the next request without rebuilding. Open pages refresh content when their tab regains focus. Code changes deploy from GitHub `main` using Workers Builds.
+This is an integrated React/Vite + Cloudflare Worker application. Keep bindings `DB` (D1), `FILES` (R2), and `ASSETS`. Content changes are stored in D1/R2 and are available on the next request without rebuilding. Open pages refresh content when their tab regains focus. The production release was deployed with Wrangler. GitHub Workers Builds still needs its dashboard connection; it is not currently verified as enabled.
 
 ## Local development and checks
 
@@ -33,28 +33,19 @@ npx wrangler d1 list
 npx wrangler r2 bucket list
 ```
 
-The source originally used Worker name `server`, D1 name `site-creator-d1` and bucket `site-creator-r2`. Confirm ownership and intended use of any existing resources before reusing them. Do not replace an unrelated existing Worker named `server`. If that name is occupied, choose a school-specific Worker name in `wrangler.jsonc` and rebuild; the generated server output folder can change with the Worker name, so update the sanitizer/check script paths as well.
-
-Only if the intended resources do not exist:
-
-```sh
-npx wrangler d1 create site-creator-d1
-npx wrangler r2 bucket create site-creator-r2
-```
-
-Replace `00000000-0000-4000-8000-000000000000` in `wrangler.jsonc` with the verified returned D1 ID. Database IDs are public configuration, not credentials. Never invent the ID. Keep R2 private: the Worker serves uploads through `/api/media/:id`; a public bucket domain is unnecessary.
+Verified production resources (September 10, 2026): Worker `server`, D1 `sanskar-school-db` (`a86af277-2236-4055-9f61-8bc51c3ea5ad`), and private R2 bucket `sanskar-school-media`. Both `sanskarschools.com` and `www.sanskarschools.com` are existing custom domains on this Worker. The committed configuration targets these resources. Do not recreate them for a routine code update.
 
 ## Migrations and existing data
 
 ```sh
-npx wrangler d1 migrations list site-creator-d1 --remote
-npx wrangler d1 migrations apply site-creator-d1 --remote
+npx wrangler d1 migrations list sanskar-school-db --remote
+npx wrangler d1 migrations apply sanskar-school-db --remote
 ```
 
 Migrations are in `drizzle/`. The first two use `IF NOT EXISTS` because the old Worker created those tables on requests. They can adopt an existing compatible database without deleting rows. The third adds revocable sessions. Inspect existing table structure before adopting an older production database; `IF NOT EXISTS` does not repair incompatible columns. Back up existing production data before migration:
 
 ```sh
-npx wrangler d1 export site-creator-d1 --remote --output backups/before-migration.sql
+npx wrangler d1 export sanskar-school-db --remote --output backups/before-migration.sql
 ```
 
 Create the ignored `backups` directory first. All three current migrations are additive. Do not drop/recreate a production database. Future schema changes belong in `db/schema.ts`; `npm run db:generate` creates migrations. Review their SQL before applying remotely. Runtime requests do not modify schema.
@@ -154,4 +145,4 @@ Hashed JS/CSS are immutable cached, unversioned images revalidate after one hour
 
 Failed D1 upload inserts remove the new R2 object. Media used by published content cannot be deleted until references are removed. D1 and R2 do not share a transaction: if deletion partially fails, retry the same deletion; R2 deletion is idempotent. Database backups contain personal data and must remain private. Monitor enquiries/email status, failed requests, storage usage and dependency updates.
 
-Four legacy testimonial photo URLs currently return HTML instead of images from the old host. Their references/content are preserved; obtain those original photos from the school and upload replacements in Admin → Testimonials before switching the domain. Six existing notice PDFs are preserved under `public/documents`. The existing virtual-tour page intentionally remains a coming-soon page.
+Four legacy testimonial photo URLs currently return HTML instead of images from the old host. Their references/content are preserved; obtain those original photos from the school and upload replacements in Admin → Testimonials when the original photos are available. Six existing notice PDFs are preserved under `public/documents`. The existing virtual-tour page intentionally remains a coming-soon page.

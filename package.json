@@ -11,8 +11,8 @@
     "db:generate": "drizzle-kit generate",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.worker.json",
     "predev": "npm run db:migrate:local",
-    "db:migrate:local": "wrangler d1 migrations apply site-creator-d1 --local",
-    "db:migrate:remote": "wrangler d1 migrations apply site-creator-d1 --remote",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
     "deploy": "node scripts/check-deployment.mjs && wrangler deploy",
     "test": "node --test tests/*.test.mjs"
   },

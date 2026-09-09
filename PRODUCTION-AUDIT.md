@@ -30,11 +30,17 @@ The audit covered frontend routes/forms/content providers and page metadata, Wor
 - Secret scan found no local credential values in tracked source or generated build output; no `.env`/`.dev.vars` files were tracked in the inspected history. Real secrets were not printed.
 - No lint script exists. The existing formatter is available.
 
-## External setup still required
+## Production deployment — September 10, 2026
 
-- Cloudflare CLI was unauthenticated. No live Worker was deployed, no remote D1/R2 resources were created or migrated, and no production secrets or DNS were changed. The placeholder D1 ID is deliberately preserved until a real resource can be verified. `npm run deploy` refuses that placeholder.
-- Owner-login runtime values: `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, `SESSION_SECRET`. Optional Resend configuration: `RESEND_API_KEY`, `EMAIL_FROM`, `LEAD_NOTIFY_TO`. Local values do not imply production values exist.
-- Canonical domain from code: `sanskarschools.com`. Domain ownership/DNS, HTTPS, apex/`www` routing and live tests remain unverified until Cloudflare login.
-- Workers Builds cannot be considered enabled until the Cloudflare Git connection is saved and a push produces a successful build/deployment. Exact branch/build/deploy settings are in DEPLOYMENT.md.
-- Four old testimonial image URLs currently serve the application HTML rather than image data. Original URLs and testimony content remain intact; the school must provide original photos or replace them through Admin → Testimonials. The intentional virtual-tour coming-soon page remains unchanged.
-- Actual Resend/FormSubmit delivery and production administrator credentials were not tested. Local tests deliberately block external notifications and use disposable credentials.
+- Authenticated to the school's Cloudflare account and verified existing Worker `server`, D1 `sanskar-school-db`, R2 `sanskar-school-media`, and both custom domains.
+- Exported a private D1 backup under ignored `.tools/backups`, inspected the compatible schema, and applied all three additive migrations. Existing resources and runtime administrator secrets were preserved.
+- Deployed version `3d98a050-be99-47e1-8e8b-6185d9720df1` to https://sanskarschools.com and https://www.sanskarschools.com. The live homepage references the new build's asset.
+- All 19 public routes, admin login page, health/content APIs, robots and sitemap returned 200. Logged-out session returned 401; unknown route returned 404; www application route redirected to the apex with 308.
+- Live Chromium checks rendered the homepage, About, Admissions, Gallery, Notices and mobile admin login without JavaScript errors.
+- TypeScript, production build and all eight isolated automated test results passed again with the real production resource configuration.
+
+## Remaining external setup and limitations
+
+- Cloudflare Workers Builds API returned 403 with the available OAuth permissions. Automatic deployment from GitHub is not verified/enabled by this work; connect the repository in the Worker dashboard using the settings in DEPLOYMENT.md. Manual deployment is complete.
+- Existing production owner credentials were preserved; an interactive production owner login and actual notification delivery were not tested. No Resend API key is configured; the existing FormSubmit fallback remains.
+- Four old testimonial photo URLs are missing. Original references and testimony content remain intact; the school must supply those photos or replace them through Admin → Testimonials. The intentional virtual-tour coming-soon page remains unchanged.
