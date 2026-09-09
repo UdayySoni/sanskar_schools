@@ -1,0 +1,17 @@
+{
+  "title": "Sanskar Public School Mathura | Modern Vedic Curriculum",
+  "description": "Mathura's first school with a Modern Vedic Curriculum. Indian Soch, International Approach—CBSE academics, values, sports, creativity and Talent Academy from Nursery to Grade 12.",
+  "robots": {
+    "index": true
+  },
+  "icons": {
+    "icon": "/optimized/logo-circle.png"
+  },
+  "openGraph": {
+    "image": "/optimized/building01.jpg"
+  },
+  "accessibility": {
+    "addBypassLinks": true,
+    "ignoreReducedMotion": false
+  }
+}

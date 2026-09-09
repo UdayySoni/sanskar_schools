@@ -1,0 +1,27 @@
+{
+  "url": "https://sanskarschools.com",
+  "alternateHosts": [
+    "www.sanskarschools.com"
+  ],
+  "routes": [
+    "/",
+    "/about",
+    "/academics",
+    "/little-winners",
+    "/infrastructure",
+    "/talent-academy",
+    "/sports-arena",
+    "/admissions",
+    "/achievements",
+    "/gallery",
+    "/notices",
+    "/contact",
+    "/pay-fee",
+    "/virtual-tour",
+    "/leadership/r-p-singhal",
+    "/leadership/rama-singhal",
+    "/leadership/akash-singhal",
+    "/leadership/rishabh-singhal",
+    "/leadership/akansha-singhal"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "figma-make-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "node scripts/clean-dist.mjs && vite build && node scripts/sanitize-build.mjs",
+    "preview": "vite preview",
+    "format": "oxfmt",
+    "db:generate": "drizzle-kit generate",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.worker.json",
+    "predev": "npm run db:migrate:local",
+    "db:migrate:local": "wrangler d1 migrations apply site-creator-d1 --local",
+    "db:migrate:remote": "wrangler d1 migrations apply site-creator-d1 --remote",
+    "deploy": "node scripts/check-deployment.mjs && wrangler deploy",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "drizzle-orm": "0.45.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.18.2",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@cloudflare/workers-types": "4.20260515.1",
+    "@openai/sites-vite-plugin": "0.2.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^6.0.0",
+    "drizzle-kit": "0.31.10",
+    "miniflare": "^4.20260515.0",
+    "oxfmt": "^0.2.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^8.0.0",
+    "wrangler": "4.92.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "npm@10.9.8"
+}
