@@ -37,7 +37,7 @@ export const LEADERSHIP = [
       "Dear Parents,\n\nSanskar draws inspiration from the idea that our actions shape who we become. We aim to make learning come alive every day through thoughtful pedagogy, real opportunity and an environment that encourages students to turn the ordinary into the extraordinary.\n\nOur vision is a modern gurukul: a school that prepares young people for a changing world while keeping them connected to character, community and Indian roots. Together, we seek to transform each person into a well-rounded personality and a proactive global citizen.\n\nGod bless you.",
   },
   {
-    role: "Director",
+    role: "Vice Chairman",
     name: "Rishabh Singhal",
     photo: "/optimized/rishabhsinghalsir.jpg",
     message:
@@ -45,14 +45,16 @@ export const LEADERSHIP = [
   },
   {
     role: "Director",
-    name: "Akansha Singhal",
+    name: "Dr Akanksha Singhal",
     photo: "/optimized/director-mam.jpg",
     message:
       "Dear Parents,\n\nI believe every child carries a unique spark waiting to be discovered. At Sanskar Public School, our aim is to nurture that spark by creating an environment where children are encouraged to dream boldly, explore fearlessly and grow with confidence.\n\nEducation, to me, is not only about preparing children for a successful future, but about helping them become thoughtful, capable and compassionate individuals. We strive to make every learning experience meaningful, inspiring our students to discover their strengths and use them to make a positive difference in the world.\n\nTogether, let us inspire young minds to dream, discover and achieve.",
   },
 ]
 
+// Preserve the existing public message URL when a display name changes.
 export const leaderSlug = (name: string) =>
+  name === "Dr Akanksha Singhal" ? "akansha-singhal" :
   name
     .toLowerCase()
     .replace(/&/g, "and")
