@@ -12,6 +12,7 @@ import {
   TOPPERS,
 } from "../data/site"
 import { usePageMeta } from "../hooks/usePageMeta"
+import SchoolGuide from "../components/SchoolGuide"
 
 export const LEADERSHIP = [
   {
@@ -750,6 +751,7 @@ export default function Home() {
     <div className="bg-cream">
       <HeroCarousel />
       <QuickActions />
+      <SchoolGuide />
 
       <section className="relative overflow-hidden py-20 lg:py-28">
         <AcademicShapes className="opacity-75" />

@@ -58,6 +58,36 @@ test("production Worker: routes, authentication, content, D1, R2 and failed emai
     assert.equal(redirect.status, 308)
     assert.equal(redirect.headers.get("location"), "https://sanskarschools.com/about?x=1")
   })
+  await t.test("search metadata, legacy redirects and structured data", async () => {
+    const config = JSON.parse(readFileSync("seo.config.json", "utf8"))
+    const titles = new Set()
+    for (const [path, expected] of Object.entries(config)) {
+      const response = await request(path)
+      assert.equal(response.status, 200)
+      const html = await response.text()
+      const title = html.match(/<title>(.*?)<\/title>/s)?.[1]
+      assert.ok(title && !titles.has(title), "unique title for " + path)
+      titles.add(title)
+      assert.ok(html.includes(expected.description.replaceAll("&", "&amp;")), path)
+      if (["/virtual-tour", "/pay-fee"].includes(path)) {
+        assert.match(response.headers.get("x-robots-tag"), /noindex/)
+        continue
+      }
+      const raw = html.match(/<script id="site-schema" type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1]
+      const graph = JSON.parse(raw)["@graph"]
+      assert.ok(graph.some(node => node["@type"] === "School" && node.identifier.value === "2132432"))
+      assert.ok(graph.some(node => node.url === "https://sanskarschools.com" + path && node.name === expected.title))
+      if (path !== "/") assert.ok(graph.some(node => node["@type"] === "BreadcrumbList"))
+      assert.ok(!raw.includes('"foundingDate"'))
+    }
+    for (const [old, target] of [["/admission", "/admissions"], ["/contact-us", "/contact"], ["/about/", "/about"], ["/index.html", "/"]]) {
+      const response = await request(old + "?source=search", {redirect:"manual"})
+      assert.equal(response.status, 308)
+      assert.equal(response.headers.get("location"), "https://sanskarschools.com" + target + "?source=search")
+    }
+    const sitemap = await (await request("/sitemap.xml")).text()
+    assert.ok(!sitemap.includes("/pay-fee") && !sitemap.includes("/virtual-tour"))
+  })
   await t.test("unauthenticated access, CSRF, login, session and replay after logout", async () => {
     assert.equal((await request("/api/admin/dashboard")).status, 401)
     assert.equal((await json("/api/auth/login", "POST", { username: "test-owner", password: "incorrect-password" })).status, 401)

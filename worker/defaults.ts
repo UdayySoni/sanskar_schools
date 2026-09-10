@@ -1,3 +1,4 @@
+import pageSeo from "../seo.config.json"
 export const DEFAULT_SETTINGS = {
   announcement: "Admissions open · Academic Session 2026–27",
   tagline: "Indian Soch, International Approach",
@@ -174,63 +175,7 @@ export const DEFAULT_SPORTS_ARENA = {
   ],
 }
 
-export const DEFAULT_SEO = {
-  "/": {
-    title: "Best CBSE School in Mathura & Vrindavan | Sanskar Public School",
-    description:
-      "Explore Sanskar Public School, a CBSE Senior Secondary school in Mathura serving Mathura–Vrindavan with strong academics, Indian values, sports, labs and admissions for 2026–27.",
-  },
-  "/admissions": {
-    title: "School Admission in Mathura 2026–27 | Sanskar Public School",
-    description:
-      "Apply for nursery to Class 12 admission at Sanskar Public School Mathura. Check the admission process, documents, CBSE streams and book a campus visit.",
-  },
-  "/about": {
-    title: "About Sanskar Public School Mathura | Vision & Values",
-    description: "Learn about Sanskar Public School Mathura, its modern-gurukul philosophy, CBSE Senior Secondary education, 10-acre campus, vision, mission and values.",
-  },
-  "/academics": {
-    title: "CBSE Academics in Mathura | Sanskar Public School",
-    description: "Explore CBSE academics, Science, Commerce and Humanities, English, Vedic maths, AI, robotics, clubs and values education at Sanskar Public School Mathura.",
-  },
-  "/little-winners": {
-    title: "Best Preschool in Mathura | Sanskar Li'l Winners",
-    description: "Explore Montessori-inspired preschool and nursery learning in Mathura with thematic classrooms, storytelling, music, movement and confident expression.",
-  },
-  "/infrastructure": {
-    title: "School Campus & Sports Facilities in Mathura | Sanskar",
-    description: "Explore Sanskar Public School’s 10-acre Mathura campus, science labs, library, creative studios, indoor sports arena, swimming pool and courts.",
-  },
-  "/achievements": {
-    title: "CBSE Results & Student Achievements | Sanskar Mathura",
-    description: "See Class X and XII board achievers and the academic, sports and co-curricular culture at Sanskar Public School Mathura.",
-  },
-  "/gallery": {
-    title: "School Photo & Video Gallery | Sanskar Public School Mathura",
-    description: "View official photos and videos of academics, laboratories, preschool, sports, arts, yoga, robotics and school life at Sanskar Mathura.",
-  },
-  "/notices": {
-    title: "School Notices, Circulars & Disclosures | Sanskar Mathura",
-    description: "Access Sanskar Public School notices, timings, rules, admission documents, exam pattern and mandatory disclosure in one place.",
-  },
-  "/contact": {
-    title: "Contact Sanskar Public School Mathura | Visit Maholi Road",
-    description: "Call, email or visit Sanskar Public School at Industrial Area, Site-A, Maholi Road, Mathura. Get directions or send an admission enquiry.",
-  },
-  "/talent-academy": {
-    title: "Sports Coaching in Mathura | Sanskar Talent Academy",
-    description: "Explore badminton, basketball, taekwondo, swimming and skating coaching at Sanskar Talent Academy in Mathura.",
-  },
-  "/sports-arena": {
-    title: "Sports Arena in Mathura | Sanskar Public School",
-    description:
-      "Explore and book Sanskar Sports Arena in Mathura for badminton, basketball, pickleball, table tennis, box cricket, skating, chess and swimming.",
-  },
-  "/pay-fee": {
-    title: "Pay School Fees Online | Sanskar Public School Mathura",
-    description: "Choose the official online fee-payment portal for Sanskar Public School Senior Wing or Sanskar Li'l Winners in Mathura.",
-  },
-}
+export const DEFAULT_SEO = pageSeo
 
 export const PUBLIC_CONTENT_DEFAULTS = {
   settings: DEFAULT_SETTINGS,

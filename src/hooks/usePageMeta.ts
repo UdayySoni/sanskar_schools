@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import siteConfig from "../../site.config.json";
+import { NON_INDEXABLE, PAGE_SEO, structuredData } from "../data/search";
 
 const BRAND = "Sanskar Public School Mathura";
 const SITE_URL = siteConfig.url;
@@ -33,11 +34,19 @@ export function usePageMeta({
       setMeta("property", "og:description", pageDescription);
       setMeta("name", "twitter:title", fullTitle);
       setMeta("name", "twitter:description", pageDescription);
+      let siteSchema = document.getElementById("site-schema");
+      if (!siteSchema) {
+        siteSchema = document.createElement("script");
+        siteSchema.id = "site-schema";
+        siteSchema.setAttribute("type", "application/ld+json");
+        document.head.appendChild(siteSchema);
+      }
+      siteSchema.textContent = JSON.stringify(structuredData(path, fullTitle, pageDescription));
     };
 
-    applyMetadata(title, description);
+    applyMetadata(PAGE_SEO[path]?.title || title, PAGE_SEO[path]?.description || description);
     setMeta("name", "keywords", keywords);
-    setMeta("name", "robots", "index, follow, max-image-preview:large");
+    setMeta("name", "robots", NON_INDEXABLE.includes(path) ? "noindex, follow" : "index, follow, max-image-preview:large");
     setMeta("property", "og:url", canonicalUrl);
     setMeta("property", "og:type", "website");
     setMeta("property", "og:site_name", BRAND);
@@ -63,6 +72,8 @@ export function usePageMeta({
         const override = payload?.content?.seo?.[path];
         if (active && override?.title && override?.description) {
           applyMetadata(override.title, override.description);
+          const siteSchema = document.getElementById("site-schema");
+          if (siteSchema) siteSchema.textContent = JSON.stringify(structuredData(path, document.title, override.description, payload.content.settings));
         }
       })
       .catch(() => undefined);

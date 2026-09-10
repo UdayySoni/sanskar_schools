@@ -1,4 +1,5 @@
 import siteConfig from "../site.config.json"
+import { LEGACY_ROUTES, NON_INDEXABLE, structuredData } from "../src/data/search"
 import { validateUpload } from "./uploads"
 import { contentSchemas } from "./content-validation"
 import { z } from "zod"
@@ -253,6 +254,9 @@ async function servePage(request: Request, env: Env) {
   const url = new URL(request.url)
   const pathname = url.pathname.replace(/\/+$/, "") || "/"
   const canonicalHost = new URL(siteConfig.url).hostname
+  const legacy = LEGACY_ROUTES[pathname]
+  if (legacy && ["GET", "HEAD"].includes(request.method)) return Response.redirect(siteConfig.url + legacy + url.search, 308)
+  if (siteConfig.routes.includes(pathname) && pathname !== url.pathname) return Response.redirect(siteConfig.url + pathname + url.search, 308)
   if (siteConfig.alternateHosts.includes(url.hostname) || (url.hostname === canonicalHost && url.protocol !== "https:")) {
     return Response.redirect(siteConfig.url + url.pathname + url.search, 308)
   }
@@ -262,7 +266,7 @@ async function servePage(request: Request, env: Env) {
   )
   if (pathname === "/sitemap.xml") return new Response(
     '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +
-      siteConfig.routes.filter(path => path !== "/virtual-tour").map(path => "<url><loc>" + escapeHtml(siteConfig.url + path) + "</loc></url>").join("") + "</urlset>",
+      siteConfig.routes.filter(path => !NON_INDEXABLE.includes(path)).map(path => "<url><loc>" + escapeHtml(siteConfig.url + path) + "</loc></url>").join("") + "</urlset>",
     { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" } },
   )
   if (!["GET", "HEAD"].includes(request.method)) return new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } })
@@ -278,13 +282,14 @@ async function servePage(request: Request, env: Env) {
   headers.set("cache-control", "no-store")
   headers.set("x-content-type-options", "nosniff")
   headers.set("referrer-policy", "strict-origin-when-cross-origin")
-  if (admin || !known) headers.set("x-robots-tag", "noindex, nofollow")
+  const noindex = admin || !known || NON_INDEXABLE.includes(pathname)
+  if (noindex) headers.set("x-robots-tag", "noindex, nofollow")
   const result = new Response(response.body, { status: known ? response.status : 404, headers })
   const canonical = siteConfig.url + pathname
   let rewriter = new HTMLRewriter()
     .on('link[rel="canonical"]', { element(el) { el.setAttribute("href", canonical) } })
     .on('meta[property="og:url"]', { element(el) { el.setAttribute("content", canonical) } })
-    .on('meta[name="robots"]', { element(el) { if (admin || !known) el.setAttribute("content", "noindex, nofollow") } })
+    .on('meta[name="robots"]', { element(el) { if (noindex) el.setAttribute("content", "noindex, nofollow") } })
   if (admin) return rewriter.transform(result)
   const content = await getContent(env.DB)
   const seo = content.seo as Record<string, { title?: string; description?: string }>
@@ -295,6 +300,11 @@ async function servePage(request: Request, env: Env) {
   }
   if (pageSeo?.description) rewriter = rewriter
     .on('meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]', { element(el) { el.setAttribute("content", pageSeo.description!) } })
+  rewriter = rewriter.on('#site-schema', { element(el) {
+    if (!known || noindex) { el.remove(); return }
+    const graph = structuredData(pathname, pageSeo?.title || "Sanskar Public School Mathura", pageSeo?.description || "", content.settings as Record<string, unknown>)
+    el.setInnerContent(JSON.stringify(graph).replace(/</g, "\\u003c"), { html: true })
+  } })
   return rewriter.transform(result)
 }
 

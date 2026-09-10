@@ -54,7 +54,7 @@ img { display: block; }
 
 .field { width: 100%; min-height: 50px; border: 1px solid #d7e0e7; border-radius: .85rem; background: #fff; padding: .8rem 1rem; color: #172738; font-size: .95rem; outline: none; transition: border-color .2s ease, box-shadow .2s ease; }
 .field:focus { border-color: #155d89; box-shadow: 0 0 0 4px rgba(21,93,137,.1); }
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.reveal { opacity: 1; transform: translateY(20px); transition: transform .7s ease; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 .image-zoom { overflow: hidden; }
 .image-zoom img { transition: transform .7s cubic-bezier(.2,.7,.2,1); }

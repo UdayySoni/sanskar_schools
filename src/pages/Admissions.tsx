@@ -12,6 +12,9 @@ const steps = [
 ]
 
 const faqs = [
+  ["What are the school fees for admission in Mathura?", "Please request the current fee structure from the admissions office for your child’s grade and academic session. Ask which tuition, admission, transport and activity charges apply. The online fee-payment portal is for payments; it does not replace an admission fee quotation."],
+  ["How do I enquire about nursery admission in Mathura?", "Select Nursery and Sanskar Li’l Winners in the enquiry form, or call the Junior Wing on 90125 39208. The team will confirm age eligibility, available places, required documents and an appropriate time to visit."],
+  ["Can I enquire about Class 11 admission?", "Yes. Select Grade 11 in the form and mention your preferred stream. The admissions team can explain current subject combinations, seat availability and eligibility based on the student’s previous results."],
   ["Which board is Sanskar Public School affiliated with?", "Sanskar Public School is affiliated with the Central Board of Secondary Education (CBSE), New Delhi. The affiliation number is 2132432, and the school is Senior Secondary level."],
   ["Which Senior Secondary streams are available?", "The school is affiliated for Science, Commerce and Humanities at the Senior Secondary level."],
   ["Does the school serve families from Vrindavan?", "Yes. The campus on Maholi Road is accessible to families across Mathura and the wider Mathura–Vrindavan area. Contact the admissions team to plan a visit and discuss transport for your locality."],
@@ -93,8 +96,8 @@ export default function Admissions() {
     <div className="bg-cream">
       <PageHero
         eyebrow="Admissions open · 2026–27"
-        title="Begin your child’s Sanskar journey."
-        description="Tell us where your child is in their learning journey. Our admissions team will help you understand the right wing, grade, process and next steps."
+        title="School admission in Mathura, made personal."
+        description="Explore admission at Sanskar Public School and Sanskar Li’l Winners for 2026–27. Ask about your child’s grade, fees, CBSE streams and a visit to our Maholi Road campus."
         image="/optimized/building01.jpg"
         imageAlt="Sanskar Public School campus in Mathura"
         action={{ label: "Go to enquiry form", to: "/admissions#enquiry" }}
