@@ -52,7 +52,7 @@ export default function PayFee() {
               <a
                 href={PAYMENT_LINKS.senior}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="button button-primary mt-7"
               >
                 Pay Senior Wing fee <Icon name="external" size={17} />
@@ -74,7 +74,7 @@ export default function PayFee() {
               <a
                 href={PAYMENT_LINKS.junior}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="button button-primary mt-7"
               >
                 Pay Li'l Winners fee <Icon name="external" size={17} />

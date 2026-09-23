@@ -1,3 +1,4 @@
+import Image from "./Image"
 import { Link, useLocation } from "react-router-dom";
 import { PAGE_SEO } from "../data/search";
 import Icon from "./Icon";
@@ -21,7 +22,7 @@ export default function PageHero({
   const { pathname } = useLocation();
   return (
     <section className="page-hero">
-      <img src={image} alt={imageAlt} className="page-hero-image" fetchPriority="high" decoding="async" />
+      <Image src={image} alt={imageAlt} sizes="100vw" className="page-hero-image" fetchPriority="high" decoding="async" />
       <div className="page-hero-overlay" />
       <div className="container relative z-10 flex min-h-[560px] items-end pb-16 pt-36 lg:min-h-[620px] lg:pb-20">
         <div className="max-w-3xl">
@@ -38,7 +39,7 @@ export default function PageHero({
             {description}
           </p>
           {action && (action.external ? (
-            <a href={action.to} target="_blank" rel="noreferrer" className={actionClass}>
+            <a href={action.to} target="_blank" rel="noopener noreferrer" className={actionClass}>
               {action.label}<Icon name="external" size={17} />
             </a>
           ) : (

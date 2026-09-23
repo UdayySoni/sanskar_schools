@@ -1,3 +1,4 @@
+import Image from "../components/Image"
 import { Link, useParams } from "react-router-dom"
 import Icon from "../components/Icon"
 import { usePageMeta } from "../hooks/usePageMeta"
@@ -34,7 +35,7 @@ export default function LeaderMessage() {
       <section className="py-20 lg:py-28">
         <div className="container grid items-start gap-12 lg:grid-cols-[.72fr_1.28fr]">
           <div className="sticky top-28 overflow-hidden rounded-[2rem] bg-white shadow-[0_20px_65px_rgba(8,43,79,.1)]">
-            <img
+            <Image
               src={leader.photo}
               alt={`${leader.name}, ${leader.role} of Sanskar Public School`}
               loading="lazy"

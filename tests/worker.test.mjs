@@ -3,6 +3,7 @@ import assert from "node:assert/strict"
 import { readFileSync, readdirSync } from "node:fs"
 import { randomBytes, createHmac } from "node:crypto"
 import { Miniflare } from "miniflare"
+import { workerModules } from "./worker-modules.mjs"
 
 test("production Worker: routes, authentication, content, D1, R2 and failed email", async t => {
   const secret = randomBytes(32).toString("hex")
@@ -10,8 +11,7 @@ test("production Worker: routes, authentication, content, D1, R2 and failed emai
   const salt = randomBytes(16).toString("base64url")
   const hash = `hmac-sha256$${salt}$${createHmac("sha256", secret).update(`${salt}:${password}`).digest("base64url")}`
   const mf = new Miniflare({
-    modules: true,
-    scriptPath: "dist/server/index.js",
+    modules: workerModules,
     compatibilityDate: "2026-05-22",
     compatibilityFlags: ["nodejs_compat"],
     d1Databases: ["DB"],
@@ -87,6 +87,67 @@ test("production Worker: routes, authentication, content, D1, R2 and failed emai
     }
     const sitemap = await (await request("/sitemap.xml")).text()
     assert.ok(!sitemap.includes("/pay-fee") && !sitemap.includes("/virtual-tour"))
+  })
+  await t.test("public content and blog articles are readable without JavaScript", async () => {
+    const routes = JSON.parse(readFileSync("site.config.json", "utf8")).routes
+    const sitemap = await (await request("/sitemap.xml")).text()
+    for (const path of routes) {
+      const response = await request(path)
+      assert.equal(response.status, 200, path)
+      const html = await response.text()
+      assert.equal((html.match(/<h1[ >]/g) || []).length, 1, "one rendered h1: " + path)
+      assert.equal((html.match(/name="description"/g) || []).length, 1, "one description: " + path)
+      assert.equal((html.match(/property="og:title"/g) || []).length, 1, "one social title: " + path)
+      assert.match(html, /href="\/blog"/, "crawlable blog navigation")
+      assert.ok(!/<div hidden(?:="")? id="S:/.test(html), "no script-dependent hidden suspense content: " + path)
+      if (path.startsWith("/blog/")) {
+        assert.ok(sitemap.includes(path), "article in sitemap")
+        assert.match(html, /<article>/)
+        assert.match(html, /<h2/)
+        assert.match(html, /"@type":"BlogPosting"/)
+        assert.match(html, /property="og:type" content="article"/)
+        assert.match(html, /"position":3/)
+        assert.ok(!html.includes('rel="preload" href="/optimized/building01.jpg"'), "no irrelevant homepage preload")
+      }
+    }
+    const achievements = await (await request("/achievements")).text()
+    for (const [name, score] of [["Shrestha Sharma", "95.2%"], ["Krishna Kumar", "94%"], ["Piyush Kumar Pandey", "93.4%"], ["Manoj Kumar", "93.2%"], ["Sneha Chaudhary", "91.8%"], ["Jaidev Goyal", "90.2%"]]) {
+      assert.ok(achievements.includes(name) && achievements.includes(score), name)
+    }
+    const portraits = [...achievements.matchAll(/<img[^>]+src="([^"]*toppers-2025-26[^"]*)"/g)]
+    assert.equal(portraits.length, 6)
+    for (const [, path] of portraits) {
+      const response = await request(path)
+      assert.equal(response.status, 200)
+      assert.match(response.headers.get("content-type"), /image\/webp/)
+    }
+    assert.ok(!achievements.includes("Mayank Agrawal") && !achievements.includes("96.8%"))
+    assert.ok(!/Rank\s*(?:<!--.*?-->)?\s*[123]/.test(achievements), "no topper rank labels")
+    const missing = await request("/blog/nonexistent-guide")
+    assert.equal(missing.status, 404)
+    assert.match(missing.headers.get("x-robots-tag"), /noindex/)
+  })
+  await t.test("audit fixes: secure pages, responsive images and transparent editorial content", async () => {
+    const response = await request("/")
+    assert.match(response.headers.get("strict-transport-security"), /max-age=31536000/)
+    const home = await response.text()
+    for (const tag of home.match(/<img\b[^>]*>/g) || []) {
+      assert.match(tag, /width="\d+"/)
+      assert.match(tag, /height="\d+"/)
+    }
+    assert.match(home, /srcSet=/i)
+    assert.match(home, /"@type":"PostalAddress"/)
+    for (const path of ["/privacy", "/website-terms", "/editorial-policy"]) {
+      assert.ok(home.includes(`href="${path}"`))
+      assert.equal((await request(path)).status, 200)
+    }
+    const article = await (await request("/blog/top-10-schools-in-mathura-shortlist")).text()
+    assert.match(article, /Top 3 schools in Mathura/)
+    assert.match(article, /1\. Sanskar Public School/)
+    assert.match(article, /10\. Jawahar Navodaya Vidyalaya/)
+    assert.match(article, /AI-generated illustration/)
+    assert.match(article, /mathura.nic.in/)
+    assert.equal((await request("/llms.txt")).status, 200)
   })
   await t.test("unauthenticated access, CSRF, login, session and replay after logout", async () => {
     assert.equal((await request("/api/admin/dashboard")).status, 401)

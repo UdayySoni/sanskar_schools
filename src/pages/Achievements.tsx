@@ -1,3 +1,4 @@
+import Image from "../components/Image"
 import { Link } from "react-router-dom"
 import Icon from "../components/Icon"
 import PageHero from "../components/PageHero"
@@ -11,7 +12,7 @@ function ResultList({ grade }: { grade: keyof typeof TOPPERS }) {
       <div className="flex items-center justify-between bg-navy px-6 py-5 text-white">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[.16em] text-gold">
-            Board achievers
+            Board achievers · 2025–26
           </p>
           <h2 className="mt-1 font-display text-3xl font-semibold">
             Class {grade}
@@ -20,16 +21,14 @@ function ResultList({ grade }: { grade: keyof typeof TOPPERS }) {
         <Icon name="award" size={34} className="text-gold" />
       </div>
       <ol className="divide-y divide-slate-100">
-        {TOPPERS[grade].map((student, index) => (
+        {TOPPERS[grade].map((student) => (
           <li
             key={student.name}
-            className="flex items-center gap-4 bg-white px-6 py-5"
+            className="flex items-center gap-3 bg-white px-4 py-5 sm:gap-4 sm:px-6"
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e9f4f2] font-display text-lg font-semibold text-teal">
-              {index + 1}
-            </span>
-            <span className="font-semibold text-navy">{student.name}</span>
-            <strong className="ml-auto text-lg text-blue">
+            <Image src={student.image} alt={student.name} width={72} height={90} loading="lazy" decoding="async" className="h-[90px] w-[72px] shrink-0 rounded-xl bg-slate-100 object-contain" />
+            <span className="min-w-0 font-semibold text-navy">{student.name}</span>
+            <strong className="ml-auto shrink-0 text-lg text-blue">
               {student.score}
             </strong>
           </li>
@@ -53,7 +52,7 @@ export default function Achievements() {
     <div className="bg-cream">
       <PageHero
         eyebrow="Results & recognition"
-        title="Effort worth celebrating."
+        title="Board toppers 2025–26."
         description="Board results are one measure of growth. We celebrate the discipline, confidence and support behind every achievement."
         image="/optimized/gallery-campus-slide-2.jpg"
         imageAlt="Sanskar school community celebrating achievement"
@@ -65,7 +64,7 @@ export default function Achievements() {
             <div>
               <p className="eyebrow">Published school results</p>
               <h2 className="section-title mt-4">
-                Our Class X and XII achievers.
+                Our Class X and XII achievers, 2025–26.
               </h2>
             </div>
             <p className="section-copy">

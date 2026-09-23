@@ -1,3 +1,4 @@
+import Image from "../components/Image"
 import { Link } from "react-router-dom"
 import Icon from "../components/Icon"
 import PageHero from "../components/PageHero"
@@ -96,7 +97,7 @@ export default function Infrastructure() {
           </Reveal>
           <div className="mt-12 grid auto-rows-[230px] grid-cols-2 gap-4 lg:auto-rows-[300px] lg:grid-cols-4">
             <Reveal className="image-zoom col-span-2 row-span-2 overflow-hidden rounded-[1.75rem]">
-              <img
+              <Image
                 src="/optimized/building01.jpg"
                 alt="Sanskar Public School building in Mathura"
                 className="h-full w-full object-cover"
@@ -106,7 +107,7 @@ export default function Infrastructure() {
               delay={60}
               className="image-zoom overflow-hidden rounded-[1.75rem]"
             >
-              <img
+              <Image
                 src="/optimized/science.jpg"
                 alt="Science laboratory activity at Sanskar"
                 className="h-full w-full object-cover"
@@ -116,7 +117,7 @@ export default function Infrastructure() {
               delay={100}
               className="image-zoom overflow-hidden rounded-[1.75rem]"
             >
-              <img
+              <Image
                 src="/optimized/music.jpg"
                 alt="Music learning at Sanskar Public School"
                 className="h-full w-full object-cover"
@@ -126,7 +127,7 @@ export default function Infrastructure() {
               delay={140}
               className="image-zoom col-span-2 overflow-hidden rounded-[1.75rem]"
             >
-              <img
+              <Image
                 src="/optimized/ai.jpg"
                 alt="Technology-enabled learning at Sanskar Public School"
                 className="h-full w-full object-cover"

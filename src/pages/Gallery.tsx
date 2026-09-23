@@ -1,3 +1,4 @@
+import Image from "../components/Image"
 import { useState } from "react"
 import AcademicShapes from "../components/AcademicShapes"
 import Icon from "../components/Icon"
@@ -124,7 +125,7 @@ export default function Gallery() {
                   index % 7 === 0 ? "sm:row-span-2" : ""
                 }`}
               >
-                <img
+                <Image
                   src={item.image}
                   alt={`${item.title} at Sanskar Public School Mathura`}
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
@@ -159,7 +160,7 @@ export default function Gallery() {
             <a
               href={YOUTUBE_CHANNEL}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="button button-gold shrink-0"
             >
               Visit YouTube channel <Icon name="external" size={17} />

@@ -1,4 +1,4 @@
-import pageSeo from "../seo.config.json"
+import { PAGE_SEO as pageSeo } from "../src/data/search"
 export const DEFAULT_SETTINGS = {
   announcement: "Admissions open · Academic Session 2026–27",
   tagline: "Indian Soch, International Approach",
@@ -7,7 +7,7 @@ export const DEFAULT_SETTINGS = {
   heroTitle: "A leading CBSE school in Mathura.",
   heroAccent: "Rooted in Indian values.",
   heroCopy:
-    "A modern gurukul serving Mathura and Vrindavan, where strong CBSE academics, Indian values, creative expression and physical confidence shape the whole child.",
+    "CBSE academics, Indian values, arts and sport for children from Mathura and Vrindavan. A place to learn, ask questions and grow with confidence.",
   heroImage: "/optimized/building01.jpg",
   primaryPhone: "75359 38481",
   secondaryPhone: "90125 39208",

@@ -1,0 +1,458 @@
+{
+  "/optimized/ai.jpg": {
+    "src": "/optimized/responsive/ai-960.webp",
+    "width": 1536,
+    "height": 1024,
+    "srcSet": "/optimized/responsive/ai-480.webp 480w, /optimized/responsive/ai-960.webp 960w, /optimized/responsive/ai-1440.webp 1440w, /optimized/responsive/ai-1536.webp 1536w"
+  },
+  "/optimized/akashsinghalsir.jpg": {
+    "src": "/optimized/responsive/akashsinghalsir-719.webp",
+    "width": 719,
+    "height": 717,
+    "srcSet": "/optimized/responsive/akashsinghalsir-480.webp 480w, /optimized/responsive/akashsinghalsir-719.webp 719w"
+  },
+  "/optimized/art-and-craft.jpg": {
+    "src": "/optimized/responsive/art-and-craft-960.webp",
+    "width": 1179,
+    "height": 1619,
+    "srcSet": "/optimized/responsive/art-and-craft-480.webp 480w, /optimized/responsive/art-and-craft-960.webp 960w, /optimized/responsive/art-and-craft-1179.webp 1179w"
+  },
+  "/optimized/building01.jpg": {
+    "src": "/optimized/responsive/building01-960.webp",
+    "width": 1200,
+    "height": 1600,
+    "srcSet": "/optimized/responsive/building01-480.webp 480w, /optimized/responsive/building01-960.webp 960w, /optimized/responsive/building01-1200.webp 1200w"
+  },
+  "/optimized/class_01.jpg": {
+    "src": "/optimized/responsive/class_01-960.webp",
+    "width": 1200,
+    "height": 1600,
+    "srcSet": "/optimized/responsive/class_01-480.webp 480w, /optimized/responsive/class_01-960.webp 960w, /optimized/responsive/class_01-1200.webp 1200w"
+  },
+  "/optimized/director-mam.jpg": {
+    "src": "/optimized/responsive/director-mam-900.webp",
+    "width": 900,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/director-mam-480.webp 480w, /optimized/responsive/director-mam-900.webp 900w"
+  },
+  "/optimized/future-ready-learning.jpg": {
+    "src": "/optimized/responsive/future-ready-learning-960.webp",
+    "width": 1672,
+    "height": 941,
+    "srcSet": "/optimized/responsive/future-ready-learning-480.webp 480w, /optimized/responsive/future-ready-learning-960.webp 960w, /optimized/responsive/future-ready-learning-1440.webp 1440w, /optimized/responsive/future-ready-learning-1672.webp 1672w"
+  },
+  "/optimized/gallery-campus-slide-1.jpg": {
+    "src": "/optimized/responsive/gallery-campus-slide-1-960.webp",
+    "width": 1800,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/gallery-campus-slide-1-480.webp 480w, /optimized/responsive/gallery-campus-slide-1-960.webp 960w, /optimized/responsive/gallery-campus-slide-1-1440.webp 1440w, /optimized/responsive/gallery-campus-slide-1-1800.webp 1800w"
+  },
+  "/optimized/gallery-campus-slide-2.jpg": {
+    "src": "/optimized/responsive/gallery-campus-slide-2-960.webp",
+    "width": 1800,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/gallery-campus-slide-2-480.webp 480w, /optimized/responsive/gallery-campus-slide-2-960.webp 960w, /optimized/responsive/gallery-campus-slide-2-1440.webp 1440w, /optimized/responsive/gallery-campus-slide-2-1800.webp 1800w"
+  },
+  "/optimized/gallery-campus-slide-3.jpg": {
+    "src": "/optimized/responsive/gallery-campus-slide-3-960.webp",
+    "width": 1800,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/gallery-campus-slide-3-480.webp 480w, /optimized/responsive/gallery-campus-slide-3-960.webp 960w, /optimized/responsive/gallery-campus-slide-3-1440.webp 1440w, /optimized/responsive/gallery-campus-slide-3-1800.webp 1800w"
+  },
+  "/optimized/gallery-campus-slide-4.jpg": {
+    "src": "/optimized/responsive/gallery-campus-slide-4-960.webp",
+    "width": 1800,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/gallery-campus-slide-4-480.webp 480w, /optimized/responsive/gallery-campus-slide-4-960.webp 960w, /optimized/responsive/gallery-campus-slide-4-1440.webp 1440w, /optimized/responsive/gallery-campus-slide-4-1800.webp 1800w"
+  },
+  "/optimized/gallery-campus-slide-5.jpg": {
+    "src": "/optimized/responsive/gallery-campus-slide-5-960.webp",
+    "width": 1800,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/gallery-campus-slide-5-480.webp 480w, /optimized/responsive/gallery-campus-slide-5-960.webp 960w, /optimized/responsive/gallery-campus-slide-5-1440.webp 1440w, /optimized/responsive/gallery-campus-slide-5-1800.webp 1800w"
+  },
+  "/optimized/gallery-campus-slide-6.jpg": {
+    "src": "/optimized/responsive/gallery-campus-slide-6-960.webp",
+    "width": 1800,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/gallery-campus-slide-6-480.webp 480w, /optimized/responsive/gallery-campus-slide-6-960.webp 960w, /optimized/responsive/gallery-campus-slide-6-1440.webp 1440w, /optimized/responsive/gallery-campus-slide-6-1800.webp 1800w"
+  },
+  "/optimized/gallery-campus-slide-7.jpg": {
+    "src": "/optimized/responsive/gallery-campus-slide-7-960.webp",
+    "width": 1800,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/gallery-campus-slide-7-480.webp 480w, /optimized/responsive/gallery-campus-slide-7-960.webp 960w, /optimized/responsive/gallery-campus-slide-7-1440.webp 1440w, /optimized/responsive/gallery-campus-slide-7-1800.webp 1800w"
+  },
+  "/optimized/gallery-campus-slide-8.jpg": {
+    "src": "/optimized/responsive/gallery-campus-slide-8-960.webp",
+    "width": 1800,
+    "height": 1200,
+    "srcSet": "/optimized/responsive/gallery-campus-slide-8-480.webp 480w, /optimized/responsive/gallery-campus-slide-8-960.webp 960w, /optimized/responsive/gallery-campus-slide-8-1440.webp 1440w, /optimized/responsive/gallery-campus-slide-8-1800.webp 1800w"
+  },
+  "/optimized/literary.jpg": {
+    "src": "/optimized/responsive/literary-960.webp",
+    "width": 1179,
+    "height": 1931,
+    "srcSet": "/optimized/responsive/literary-480.webp 480w, /optimized/responsive/literary-960.webp 960w, /optimized/responsive/literary-1179.webp 1179w"
+  },
+  "/optimized/little-winners-learning.jpg": {
+    "src": "/optimized/responsive/little-winners-learning-960.webp",
+    "width": 1448,
+    "height": 1086,
+    "srcSet": "/optimized/responsive/little-winners-learning-480.webp 480w, /optimized/responsive/little-winners-learning-960.webp 960w, /optimized/responsive/little-winners-learning-1440.webp 1440w, /optimized/responsive/little-winners-learning-1448.webp 1448w"
+  },
+  "/optimized/live-about-school.jpg": {
+    "src": "/optimized/responsive/live-about-school-960.webp",
+    "width": 1400,
+    "height": 535,
+    "srcSet": "/optimized/responsive/live-about-school-480.webp 480w, /optimized/responsive/live-about-school-960.webp 960w, /optimized/responsive/live-about-school-1400.webp 1400w"
+  },
+  "/optimized/live-art-and-craft.jpg": {
+    "src": "/optimized/responsive/live-art-and-craft-960.webp",
+    "width": 1400,
+    "height": 999,
+    "srcSet": "/optimized/responsive/live-art-and-craft-480.webp 480w, /optimized/responsive/live-art-and-craft-960.webp 960w, /optimized/responsive/live-art-and-craft-1400.webp 1400w"
+  },
+  "/optimized/live-av-room.jpg": {
+    "src": "/optimized/responsive/live-av-room-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-av-room-480.webp 480w, /optimized/responsive/live-av-room-960.webp 960w, /optimized/responsive/live-av-room-1400.webp 1400w"
+  },
+  "/optimized/live-biology-lab.jpg": {
+    "src": "/optimized/responsive/live-biology-lab-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-biology-lab-480.webp 480w, /optimized/responsive/live-biology-lab-960.webp 960w, /optimized/responsive/live-biology-lab-1400.webp 1400w"
+  },
+  "/optimized/live-campus-infrastructure.jpg": {
+    "src": "/optimized/responsive/live-campus-infrastructure-960.webp",
+    "width": 1170,
+    "height": 768,
+    "srcSet": "/optimized/responsive/live-campus-infrastructure-480.webp 480w, /optimized/responsive/live-campus-infrastructure-960.webp 960w, /optimized/responsive/live-campus-infrastructure-1170.webp 1170w"
+  },
+  "/optimized/live-chemistry-lab.jpg": {
+    "src": "/optimized/responsive/live-chemistry-lab-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-chemistry-lab-480.webp 480w, /optimized/responsive/live-chemistry-lab-960.webp 960w, /optimized/responsive/live-chemistry-lab-1400.webp 1400w"
+  },
+  "/optimized/live-coding.jpg": {
+    "src": "/optimized/responsive/live-coding-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-coding-480.webp 480w, /optimized/responsive/live-coding-960.webp 960w, /optimized/responsive/live-coding-1400.webp 1400w"
+  },
+  "/optimized/live-computer-lab.jpg": {
+    "src": "/optimized/responsive/live-computer-lab-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-computer-lab-480.webp 480w, /optimized/responsive/live-computer-lab-960.webp 960w, /optimized/responsive/live-computer-lab-1400.webp 1400w"
+  },
+  "/optimized/live-dance.jpg": {
+    "src": "/optimized/responsive/live-dance-960.webp",
+    "width": 1024,
+    "height": 576,
+    "srcSet": "/optimized/responsive/live-dance-480.webp 480w, /optimized/responsive/live-dance-960.webp 960w, /optimized/responsive/live-dance-1024.webp 1024w"
+  },
+  "/optimized/live-english-lab.jpg": {
+    "src": "/optimized/responsive/live-english-lab-800.webp",
+    "width": 800,
+    "height": 400,
+    "srcSet": "/optimized/responsive/live-english-lab-480.webp 480w, /optimized/responsive/live-english-lab-800.webp 800w"
+  },
+  "/optimized/live-indoor-activity-hall.jpg": {
+    "src": "/optimized/responsive/live-indoor-activity-hall-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-indoor-activity-hall-480.webp 480w, /optimized/responsive/live-indoor-activity-hall-960.webp 960w, /optimized/responsive/live-indoor-activity-hall-1400.webp 1400w"
+  },
+  "/optimized/live-indoor-sports.jpg": {
+    "src": "/optimized/responsive/live-indoor-sports-960.webp",
+    "width": 1280,
+    "height": 588,
+    "srcSet": "/optimized/responsive/live-indoor-sports-480.webp 480w, /optimized/responsive/live-indoor-sports-960.webp 960w, /optimized/responsive/live-indoor-sports-1280.webp 1280w"
+  },
+  "/optimized/live-library.jpg": {
+    "src": "/optimized/responsive/live-library-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-library-480.webp 480w, /optimized/responsive/live-library-960.webp 960w, /optimized/responsive/live-library-1400.webp 1400w"
+  },
+  "/optimized/live-little-winners-confidence.jpg": {
+    "src": "/optimized/responsive/live-little-winners-confidence-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-little-winners-confidence-480.webp 480w, /optimized/responsive/live-little-winners-confidence-960.webp 960w, /optimized/responsive/live-little-winners-confidence-1400.webp 1400w"
+  },
+  "/optimized/live-little-winners-fun-learning.jpg": {
+    "src": "/optimized/responsive/live-little-winners-fun-learning-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-little-winners-fun-learning-480.webp 480w, /optimized/responsive/live-little-winners-fun-learning-960.webp 960w, /optimized/responsive/live-little-winners-fun-learning-1400.webp 1400w"
+  },
+  "/optimized/live-little-winners-overview.jpg": {
+    "src": "/optimized/responsive/live-little-winners-overview-937.webp",
+    "width": 937,
+    "height": 625,
+    "srcSet": "/optimized/responsive/live-little-winners-overview-480.webp 480w, /optimized/responsive/live-little-winners-overview-937.webp 937w"
+  },
+  "/optimized/live-little-winners-play-zone.jpg": {
+    "src": "/optimized/responsive/live-little-winners-play-zone-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-little-winners-play-zone-480.webp 480w, /optimized/responsive/live-little-winners-play-zone-960.webp 960w, /optimized/responsive/live-little-winners-play-zone-1400.webp 1400w"
+  },
+  "/optimized/live-little-winners-storytelling.jpg": {
+    "src": "/optimized/responsive/live-little-winners-storytelling-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-little-winners-storytelling-480.webp 480w, /optimized/responsive/live-little-winners-storytelling-960.webp 960w, /optimized/responsive/live-little-winners-storytelling-1400.webp 1400w"
+  },
+  "/optimized/live-little-winners-visual-learning.jpg": {
+    "src": "/optimized/responsive/live-little-winners-visual-learning-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-little-winners-visual-learning-480.webp 480w, /optimized/responsive/live-little-winners-visual-learning-960.webp 960w, /optimized/responsive/live-little-winners-visual-learning-1400.webp 1400w"
+  },
+  "/optimized/live-martial-arts.jpg": {
+    "src": "/optimized/responsive/live-martial-arts-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-martial-arts-480.webp 480w, /optimized/responsive/live-martial-arts-960.webp 960w, /optimized/responsive/live-martial-arts-1400.webp 1400w"
+  },
+  "/optimized/live-meditation.jpg": {
+    "src": "/optimized/responsive/live-meditation-960.webp",
+    "width": 960,
+    "height": 1440,
+    "srcSet": "/optimized/responsive/live-meditation-480.webp 480w, /optimized/responsive/live-meditation-960.webp 960w"
+  },
+  "/optimized/live-mission.jpg": {
+    "src": "/optimized/responsive/live-mission-960.webp",
+    "width": 1400,
+    "height": 1105,
+    "srcSet": "/optimized/responsive/live-mission-480.webp 480w, /optimized/responsive/live-mission-960.webp 960w, /optimized/responsive/live-mission-1400.webp 1400w"
+  },
+  "/optimized/live-music-and-dance.jpg": {
+    "src": "/optimized/responsive/live-music-and-dance-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-music-and-dance-480.webp 480w, /optimized/responsive/live-music-and-dance-960.webp 960w, /optimized/responsive/live-music-and-dance-1400.webp 1400w"
+  },
+  "/optimized/live-music-lab.jpg": {
+    "src": "/optimized/responsive/live-music-lab-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-music-lab-480.webp 480w, /optimized/responsive/live-music-lab-960.webp 960w, /optimized/responsive/live-music-lab-1400.webp 1400w"
+  },
+  "/optimized/live-music.jpg": {
+    "src": "/optimized/responsive/live-music-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-music-480.webp 480w, /optimized/responsive/live-music-960.webp 960w, /optimized/responsive/live-music-1400.webp 1400w"
+  },
+  "/optimized/live-outdoor-sports.jpg": {
+    "src": "/optimized/responsive/live-outdoor-sports-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-outdoor-sports-480.webp 480w, /optimized/responsive/live-outdoor-sports-960.webp 960w, /optimized/responsive/live-outdoor-sports-1400.webp 1400w"
+  },
+  "/optimized/live-physics-lab.jpg": {
+    "src": "/optimized/responsive/live-physics-lab-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-physics-lab-480.webp 480w, /optimized/responsive/live-physics-lab-960.webp 960w, /optimized/responsive/live-physics-lab-1400.webp 1400w"
+  },
+  "/optimized/live-professional-sports.jpg": {
+    "src": "/optimized/responsive/live-professional-sports-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-professional-sports-480.webp 480w, /optimized/responsive/live-professional-sports-960.webp 960w, /optimized/responsive/live-professional-sports-1400.webp 1400w"
+  },
+  "/optimized/live-reading.jpg": {
+    "src": "/optimized/responsive/live-reading-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-reading-480.webp 480w, /optimized/responsive/live-reading-960.webp 960w, /optimized/responsive/live-reading-1400.webp 1400w"
+  },
+  "/optimized/live-robotics.jpg": {
+    "src": "/optimized/responsive/live-robotics-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-robotics-480.webp 480w, /optimized/responsive/live-robotics-960.webp 960w, /optimized/responsive/live-robotics-1400.webp 1400w"
+  },
+  "/optimized/live-sanskar-class.jpg": {
+    "src": "/optimized/responsive/live-sanskar-class-960.webp",
+    "width": 1280,
+    "height": 960,
+    "srcSet": "/optimized/responsive/live-sanskar-class-480.webp 480w, /optimized/responsive/live-sanskar-class-960.webp 960w, /optimized/responsive/live-sanskar-class-1280.webp 1280w"
+  },
+  "/optimized/live-skating.jpg": {
+    "src": "/optimized/responsive/live-skating-254.webp",
+    "width": 254,
+    "height": 377,
+    "srcSet": "/optimized/responsive/live-skating-254.webp 254w"
+  },
+  "/optimized/live-spirituality.jpg": {
+    "src": "/optimized/responsive/live-spirituality-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-spirituality-480.webp 480w, /optimized/responsive/live-spirituality-960.webp 960w, /optimized/responsive/live-spirituality-1400.webp 1400w"
+  },
+  "/optimized/live-spoken-english.jpg": {
+    "src": "/optimized/responsive/live-spoken-english-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-spoken-english-480.webp 480w, /optimized/responsive/live-spoken-english-960.webp 960w, /optimized/responsive/live-spoken-english-1400.webp 1400w"
+  },
+  "/optimized/live-storytelling.jpg": {
+    "src": "/optimized/responsive/live-storytelling-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-storytelling-480.webp 480w, /optimized/responsive/live-storytelling-960.webp 960w, /optimized/responsive/live-storytelling-1400.webp 1400w"
+  },
+  "/optimized/live-vedic-maths.jpg": {
+    "src": "/optimized/responsive/live-vedic-maths-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-vedic-maths-480.webp 480w, /optimized/responsive/live-vedic-maths-960.webp 960w, /optimized/responsive/live-vedic-maths-1400.webp 1400w"
+  },
+  "/optimized/live-vision.jpg": {
+    "src": "/optimized/responsive/live-vision-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-vision-480.webp 480w, /optimized/responsive/live-vision-960.webp 960w, /optimized/responsive/live-vision-1400.webp 1400w"
+  },
+  "/optimized/live-yoga.jpg": {
+    "src": "/optimized/responsive/live-yoga-960.webp",
+    "width": 1400,
+    "height": 933,
+    "srcSet": "/optimized/responsive/live-yoga-480.webp 480w, /optimized/responsive/live-yoga-960.webp 960w, /optimized/responsive/live-yoga-1400.webp 1400w"
+  },
+  "/optimized/logo-circle.png": {
+    "src": "/optimized/responsive/logo-circle-150.webp",
+    "width": 150,
+    "height": 150,
+    "srcSet": "/optimized/responsive/logo-circle-150.webp 150w"
+  },
+  "/optimized/music.jpg": {
+    "src": "/optimized/responsive/music-960.webp",
+    "width": 1800,
+    "height": 1350,
+    "srcSet": "/optimized/responsive/music-480.webp 480w, /optimized/responsive/music-960.webp 960w, /optimized/responsive/music-1440.webp 1440w, /optimized/responsive/music-1800.webp 1800w"
+  },
+  "/optimized/pool.jpg": {
+    "src": "/optimized/responsive/pool-960.webp",
+    "width": 1448,
+    "height": 1086,
+    "srcSet": "/optimized/responsive/pool-480.webp 480w, /optimized/responsive/pool-960.webp 960w, /optimized/responsive/pool-1440.webp 1440w, /optimized/responsive/pool-1448.webp 1448w"
+  },
+  "/optimized/ramasinghalmam.jpg": {
+    "src": "/optimized/responsive/ramasinghalmam-327.webp",
+    "width": 327,
+    "height": 359,
+    "srcSet": "/optimized/responsive/ramasinghalmam-327.webp 327w"
+  },
+  "/optimized/rishabhsinghalsir.jpg": {
+    "src": "/optimized/responsive/rishabhsinghalsir-960.webp",
+    "width": 1200,
+    "height": 1600,
+    "srcSet": "/optimized/responsive/rishabhsinghalsir-480.webp 480w, /optimized/responsive/rishabhsinghalsir-960.webp 960w, /optimized/responsive/rishabhsinghalsir-1200.webp 1200w"
+  },
+  "/optimized/robotics.jpg": {
+    "src": "/optimized/responsive/robotics-960.webp",
+    "width": 1179,
+    "height": 2027,
+    "srcSet": "/optimized/responsive/robotics-480.webp 480w, /optimized/responsive/robotics-960.webp 960w, /optimized/responsive/robotics-1179.webp 1179w"
+  },
+  "/optimized/rpsinghalsir.jpg": {
+    "src": "/optimized/responsive/rpsinghalsir-960.webp",
+    "width": 1200,
+    "height": 1600,
+    "srcSet": "/optimized/responsive/rpsinghalsir-480.webp 480w, /optimized/responsive/rpsinghalsir-960.webp 960w, /optimized/responsive/rpsinghalsir-1200.webp 1200w"
+  },
+  "/optimized/science.jpg": {
+    "src": "/optimized/responsive/science-960.webp",
+    "width": 1179,
+    "height": 1964,
+    "srcSet": "/optimized/responsive/science-480.webp 480w, /optimized/responsive/science-960.webp 960w, /optimized/responsive/science-1179.webp 1179w"
+  },
+  "/optimized/skating.jpg": {
+    "src": "/optimized/responsive/skating-960.webp",
+    "width": 1179,
+    "height": 1844,
+    "srcSet": "/optimized/responsive/skating-480.webp 480w, /optimized/responsive/skating-960.webp 960w, /optimized/responsive/skating-1179.webp 1179w"
+  },
+  "/optimized/sports_arena.jpg": {
+    "src": "/optimized/responsive/sports_arena-960.webp",
+    "width": 1200,
+    "height": 1600,
+    "srcSet": "/optimized/responsive/sports_arena-480.webp 480w, /optimized/responsive/sports_arena-960.webp 960w, /optimized/responsive/sports_arena-1200.webp 1200w"
+  },
+  "/optimized/talent-academy-training.jpg": {
+    "src": "/optimized/responsive/talent-academy-training-960.webp",
+    "width": 1672,
+    "height": 941,
+    "srcSet": "/optimized/responsive/talent-academy-training-480.webp 480w, /optimized/responsive/talent-academy-training-960.webp 960w, /optimized/responsive/talent-academy-training-1440.webp 1440w, /optimized/responsive/talent-academy-training-1672.webp 1672w"
+  },
+  "/optimized/blog/sanskar-admissions.webp": {
+    "src": "/optimized/responsive/blog-sanskar-admissions-960.webp",
+    "width": 1536,
+    "height": 1024,
+    "srcSet": "/optimized/responsive/blog-sanskar-admissions-480.webp 480w, /optimized/responsive/blog-sanskar-admissions-960.webp 960w, /optimized/responsive/blog-sanskar-admissions-1440.webp 1440w, /optimized/responsive/blog-sanskar-admissions-1536.webp 1536w"
+  },
+  "/optimized/blog/sanskar-classroom.webp": {
+    "src": "/optimized/responsive/blog-sanskar-classroom-960.webp",
+    "width": 1536,
+    "height": 1024,
+    "srcSet": "/optimized/responsive/blog-sanskar-classroom-480.webp 480w, /optimized/responsive/blog-sanskar-classroom-960.webp 960w, /optimized/responsive/blog-sanskar-classroom-1440.webp 1440w, /optimized/responsive/blog-sanskar-classroom-1536.webp 1536w"
+  },
+  "/optimized/blog/sanskar-library.webp": {
+    "src": "/optimized/responsive/blog-sanskar-library-960.webp",
+    "width": 1536,
+    "height": 1024,
+    "srcSet": "/optimized/responsive/blog-sanskar-library-480.webp 480w, /optimized/responsive/blog-sanskar-library-960.webp 960w, /optimized/responsive/blog-sanskar-library-1440.webp 1440w, /optimized/responsive/blog-sanskar-library-1536.webp 1536w"
+  },
+  "/optimized/toppers-2025-26/jaidev-goyal.webp": {
+    "src": "/optimized/toppers-2025-26/jaidev-goyal.webp",
+    "width": 330,
+    "height": 420,
+    "srcSet": "/optimized/toppers-2025-26/jaidev-goyal.webp 330w"
+  },
+  "/optimized/toppers-2025-26/krishna-kumar.webp": {
+    "src": "/optimized/toppers-2025-26/krishna-kumar.webp",
+    "width": 243,
+    "height": 307,
+    "srcSet": "/optimized/toppers-2025-26/krishna-kumar.webp 243w"
+  },
+  "/optimized/toppers-2025-26/manoj-kumar.webp": {
+    "src": "/optimized/toppers-2025-26/manoj-kumar.webp",
+    "width": 330,
+    "height": 420,
+    "srcSet": "/optimized/toppers-2025-26/manoj-kumar.webp 330w"
+  },
+  "/optimized/toppers-2025-26/piyush-kumar-pandey.webp": {
+    "src": "/optimized/toppers-2025-26/piyush-kumar-pandey.webp",
+    "width": 243,
+    "height": 307,
+    "srcSet": "/optimized/toppers-2025-26/piyush-kumar-pandey.webp 243w"
+  },
+  "/optimized/toppers-2025-26/shrestha-sharma.webp": {
+    "src": "/optimized/toppers-2025-26/shrestha-sharma.webp",
+    "width": 243,
+    "height": 307,
+    "srcSet": "/optimized/toppers-2025-26/shrestha-sharma.webp 243w"
+  },
+  "/optimized/toppers-2025-26/sneha-chaudhary.webp": {
+    "src": "/optimized/toppers-2025-26/sneha-chaudhary.webp",
+    "width": 330,
+    "height": 420,
+    "srcSet": "/optimized/toppers-2025-26/sneha-chaudhary.webp 330w"
+  },
+  "/logo.png": {
+    "src": "/optimized/responsive/root-logo-960.webp",
+    "width": 1471,
+    "height": 435,
+    "srcSet": "/optimized/responsive/root-logo-480.webp 480w, /optimized/responsive/root-logo-960.webp 960w, /optimized/responsive/root-logo-1440.webp 1440w, /optimized/responsive/root-logo-1471.webp 1471w"
+  }
+}

@@ -50,7 +50,7 @@ export default function Notices() {
                   <a
                     href={notice.href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="card interactive-card group flex items-center gap-4 p-5 sm:p-6"
                   >
                     <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#e9f4f2] text-teal">

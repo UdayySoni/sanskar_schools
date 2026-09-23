@@ -1,3 +1,4 @@
+import Image from "../components/Image"
 import { Link } from "react-router-dom"
 import Icon from "../components/Icon"
 import PageHero from "../components/PageHero"
@@ -99,7 +100,7 @@ export default function SportsArena() {
                 className="card interactive-card group overflow-hidden"
               >
                 <div className="aspect-[16/9] overflow-hidden">
-                  <img
+                  <Image
                     src={experience.image}
                     alt={`${experience.title} at Sanskar Sports Arena`}
                     loading="lazy"
@@ -137,7 +138,7 @@ export default function SportsArena() {
             <a
               href={sportsArena.bookingUrl}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="button button-gold mt-7"
             >
               {sportsArena.bookingLabel} <Icon name="external" size={17} />
@@ -173,7 +174,7 @@ export default function SportsArena() {
           <a
             href={sportsArena.bookingUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="button button-primary mt-7"
           >
             {sportsArena.bookingLabel} <Icon name="external" size={17} />

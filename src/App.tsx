@@ -10,11 +10,15 @@ import Footer from "./components/Footer"
 import Icon from "./components/Icon"
 import Nav from "./components/Nav"
 import { LanguageProvider } from "./context/Language"
-import { SiteContentProvider } from "./context/SiteContent"
+import { SiteContentProvider, type SiteContentValue } from "./context/SiteContent"
+import { usePageMeta } from "./hooks/usePageMeta"
 import { WHATSAPP_URL } from "./data/site"
 import Home from "./pages/Home"
 
 const About = lazy(() => import("./pages/About"))
+const Blog = lazy(() => import("./pages/Blog"))
+const BlogArticle = lazy(() => import("./pages/BlogArticle"))
+const Policy = lazy(() => import("./pages/Policy"))
 const Academics = lazy(() => import("./pages/Academics"))
 const Achievements = lazy(() => import("./pages/Achievements"))
 const Admissions = lazy(() => import("./pages/Admissions"))
@@ -49,7 +53,7 @@ function WhatsAppButton() {
     <a
       href={WHATSAPP_URL}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       aria-label="Chat with Sanskar Public School on WhatsApp at 75359 38481"
       className="fixed bottom-5 right-5 z-40 flex h-14 items-center justify-center rounded-full bg-[#1f9d61] px-4 text-white shadow-[0_12px_35px_rgba(31,157,97,.35)] transition-transform hover:-translate-y-1 sm:bottom-7 sm:right-7"
     >
@@ -68,6 +72,8 @@ function WhatsAppButton() {
 }
 
 function NotFound() {
+  const { pathname } = useLocation()
+  usePageMeta({ title: "Page not found | Sanskar Public School", description: "The requested page could not be found.", path: pathname })
   return (
     <section className="flex min-h-[75vh] items-center bg-cream pt-32">
       <div className="container text-center">
@@ -85,7 +91,7 @@ function NotFound() {
   )
 }
 
-function AppRoutes() {
+export function AppRoutes({ initialContent }: { initialContent?: Partial<SiteContentValue> }) {
   const { pathname } = useLocation()
 
   if (pathname === "/admin" || pathname.startsWith("/admin/")) {
@@ -100,7 +106,7 @@ function AppRoutes() {
   }
 
   return (
-    <SiteContentProvider>
+    <SiteContentProvider initialContent={initialContent}>
       <LanguageProvider>
         <ScrollToTop />
         <Nav />
@@ -108,6 +114,11 @@ function AppRoutes() {
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogArticle />} />
+              <Route path="/privacy" element={<Policy />} />
+              <Route path="/website-terms" element={<Policy />} />
+              <Route path="/editorial-policy" element={<Policy />} />
               <Route path="/about" element={<About />} />
               <Route path="/academics" element={<Academics />} />
               <Route path="/little-winners" element={<LittleWinners />} />
@@ -153,10 +164,10 @@ function PageLoader() {
   )
 }
 
-export default function App() {
+export default function App({ initialContent }: { initialContent?: Partial<SiteContentValue> }) {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <AppRoutes initialContent={initialContent} />
     </BrowserRouter>
   )
 }

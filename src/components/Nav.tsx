@@ -1,3 +1,4 @@
+import Image from "./Image"
 import { useEffect, useState } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
 import { useSiteContent } from "../context/SiteContent"
@@ -16,6 +17,7 @@ const links = [
 ]
 
 const moreLinks = [
+  { label: "Blog & parent guides", to: "/blog" },
   { label: "Achievements", to: "/achievements" },
   { label: "Gallery", to: "/gallery" },
   { label: "Contact", to: "/contact" },
@@ -71,7 +73,7 @@ export default function Nav() {
             <a
               href={STA_PORTAL}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="hover:text-gold"
             >
               Book Talent Academy coaching
@@ -85,9 +87,11 @@ export default function Nav() {
           className="shrink-0"
           aria-label="Sanskar Public School home"
         >
-          <img
+          <Image
             src="/logo.png"
             alt="Sanskar Public School"
+            loading="eager"
+            sizes="230px"
             className="h-10 w-auto max-w-[145px] object-contain sm:h-[52px] sm:max-w-[230px]"
           />
         </Link>

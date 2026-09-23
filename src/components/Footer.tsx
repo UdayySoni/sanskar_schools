@@ -1,3 +1,4 @@
+import Image from "./Image"
 import { Link } from "react-router-dom"
 import { useSiteContent } from "../context/SiteContent"
 import { STA_PORTAL } from "../data/site"
@@ -11,6 +12,7 @@ const quickLinks = [
   ["Talent Academy", "/talent-academy"],
   ["Sports Arena", "/sports-arena"],
   ["Achievements", "/achievements"],
+  ["Blog & parent guides", "/blog"],
   ["Gallery", "/gallery"],
   ["Admissions", "/admissions"],
 ]
@@ -21,7 +23,7 @@ export default function Footer() {
     <footer className="bg-navy-deep text-white">
       <div className="container grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.15fr_.7fr_.7fr_1.15fr] lg:gap-12">
         <div>
-          <img
+          <Image
             src="/logo.png"
             alt="Sanskar Public School"
             loading="lazy"
@@ -84,7 +86,7 @@ export default function Footer() {
               <a
                 href={STA_PORTAL}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="hover:text-gold"
               >
                 Book Talent Academy coaching
@@ -101,7 +103,7 @@ export default function Footer() {
                 className="mt-0.5 shrink-0 text-gold"
                 size={19}
               />
-              <span>{settings.address}</span>
+              <address className="not-italic">{settings.address}</address>
             </li>
             <li className="flex gap-3">
               <Icon
@@ -134,6 +136,13 @@ export default function Footer() {
             </li>
           </ul>
         </div>
+      </div>
+      <div className="container flex flex-wrap gap-x-6 gap-y-3 pb-8 text-sm text-white/80">
+        <Link to="/privacy" className="hover:text-gold">Privacy notice</Link>
+        <Link to="/website-terms" className="hover:text-gold">Website terms</Link>
+        <Link to="/editorial-policy" className="hover:text-gold">Editorial policy</Link>
+        <a href="https://www.youtube.com/@sanskarpublicschoolmathura4604" target="_blank" rel="noopener noreferrer" className="hover:text-gold">Sanskar on YouTube</a>
+        <a href="https://www.linkedin.com/company/sanskar-school-mathura" target="_blank" rel="noopener noreferrer" className="hover:text-gold">Sanskar on LinkedIn</a>
       </div>
       <div className="border-t border-white/10">
         <div className="container flex flex-col gap-3 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">

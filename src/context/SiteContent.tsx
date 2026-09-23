@@ -62,7 +62,7 @@ export type MediaItem = {
   url: string
 }
 
-type SiteContentValue = {
+export type SiteContentValue = {
   settings: SiteSettings
   notices: EditableNotice[]
   programmes: BoardItem[]
@@ -80,7 +80,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   heroTitle: "A leading CBSE school in Mathura.",
   heroAccent: "Rooted in Indian values.",
   heroCopy:
-    "A modern gurukul serving Mathura and Vrindavan, where strong CBSE academics, Indian values, creative expression and physical confidence shape the whole child.",
+    "CBSE academics, Indian values, arts and sport for children from Mathura and Vrindavan. A place to learn, ask questions and grow with confidence.",
   heroImage: "/optimized/building01.jpg",
   primaryPhone: "75359 38481",
   secondaryPhone: "90125 39208",
@@ -221,10 +221,10 @@ async function loadPublicContent() {
   if (!publicContentRequest) {
     publicContentRequest = Promise.all([
       fetch("/api/content").then((response) =>
-        response.ok ? response.json() : null,
+        response.ok ? response.json() as Promise<{ content: Partial<SiteContentValue> }> : null,
       ),
       fetch("/api/media").then((response) =>
-        response.ok ? response.json() : null,
+        response.ok ? response.json() as Promise<{ media: MediaItem[] }> : null,
       ),
     ])
       .then(([contentResponse, mediaResponse]) => ({
@@ -242,8 +242,8 @@ async function loadPublicContent() {
   return publicContentRequest
 }
 
-export function SiteContentProvider({ children }: { children: React.ReactNode }) {
-  const [content, setContent] = useState<SiteContentValue>(fallback)
+export function SiteContentProvider({ children, initialContent }: { children: React.ReactNode; initialContent?: Partial<SiteContentValue> }) {
+  const [content, setContent] = useState<SiteContentValue>(() => ({ ...fallback, ...initialContent, settings: { ...DEFAULT_SETTINGS, ...initialContent?.settings }, sportsArena: { ...DEFAULT_SPORTS_ARENA, ...initialContent?.sportsArena } }))
 
   useEffect(() => {
     let active = true

@@ -1,3 +1,4 @@
+import Image from "../components/Image"
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import AcademicShapes from "../components/AcademicShapes"
@@ -141,13 +142,14 @@ function HeroCarousel() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {HERO_SLIDES.map((slide, index) => (
-        <img
+      {HERO_SLIDES.map((slide, index) => current === index && (
+        <Image
           key={slide.image}
           src={index === 0 ? settings.heroImage : slide.image}
           alt={slide.label}
+          sizes="100vw"
           fetchPriority={index === 0 ? "high" : "auto"}
-          loading={index === 0 ? "eager" : "lazy"}
+          loading="eager"
           decoding="async"
           className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1400ms]"
           style={{
@@ -170,7 +172,7 @@ function HeroCarousel() {
         <div className="max-w-3xl">
           <p className="eyebrow eyebrow-light">{settings.themeLine}</p>
           <h1 className="mt-5 font-display text-5xl font-semibold leading-[.96] tracking-[-.045em] text-white sm:text-6xl lg:text-[5.25rem]">
-            {settings.heroTitle}
+            {settings.heroTitle}{" "}
             <br />
             <span className="text-gold">{settings.heroAccent}</span>
           </h1>
@@ -298,7 +300,7 @@ function QuickActions() {
               key={action.label}
               href={action.to}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={`group flex items-center gap-3 px-5 py-6 ${
                 index < 3 ? "lg:border-r lg:border-slate-100" : ""
               }`}
@@ -326,11 +328,11 @@ function AchievementSpotlight() {
   const [category, setCategory] = useState<keyof typeof TOPPERS>("XII")
   return (
     <section className="overflow-hidden bg-navy-deep py-20 text-white lg:py-28">
-      <div className="container grid items-center gap-12 lg:grid-cols-[.9fr_1.1fr]">
+      <div className="container grid grid-cols-1 items-center gap-12 lg:grid-cols-[.9fr_1.1fr]">
         <Reveal>
-          <p className="eyebrow eyebrow-light">Stars of Sanskar</p>
+          <p className="eyebrow eyebrow-light">Stars of Sanskar · 2025–26</p>
           <h2 className="mt-4 font-display text-5xl font-semibold leading-[1.02] sm:text-6xl">
-            Effort deserves its moment.
+            Our board toppers.
           </h2>
           <p className="mt-5 max-w-xl leading-8 text-white/62">
             We celebrate learners who set a high academic standard—and the
@@ -342,6 +344,7 @@ function AchievementSpotlight() {
               <button
                 key={item}
                 type="button"
+                aria-pressed={category === item}
                 onClick={() => setCategory(item)}
                 className={`rounded-full px-5 py-2.5 text-xs font-bold transition ${
                   category === item
@@ -354,25 +357,19 @@ function AchievementSpotlight() {
             ))}
           </div>
         </Reveal>
-        <Reveal delay={90} className="relative">
+        <Reveal delay={90} className="relative min-w-0">
           <div className="absolute -inset-10 rounded-full bg-gold/10 blur-3xl" />
           <div className="relative grid gap-3 sm:grid-cols-2">
             {TOPPERS[category].map((student, index) => (
               <div
                 key={student.name}
-                className={`flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[.06] p-4 backdrop-blur ${
+                className={`flex min-w-0 items-center gap-2 rounded-2xl border border-white/10 bg-white/[.06] p-3 backdrop-blur sm:gap-4 sm:p-4 ${
                   index === 0 ? "sm:col-span-2 !bg-gold !text-navy" : ""
                 }`}
               >
-                <span
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-lg font-semibold ${
-                    index === 0 ? "bg-navy text-white" : "bg-white/10 text-gold"
-                  }`}
-                >
-                  {index + 1}
-                </span>
-                <div>
-                  <strong className="font-display text-xl">
+                <Image src={student.image} alt={student.name} width={64} height={80} loading="lazy" decoding="async" className="h-20 w-16 shrink-0 rounded-xl bg-white object-contain" />
+                <div className="min-w-0">
+                  <strong className="font-display text-base sm:text-xl">
                     {student.name}
                   </strong>
                   <span
@@ -383,7 +380,7 @@ function AchievementSpotlight() {
                     Class {category}
                   </span>
                 </div>
-                <strong className="ml-auto font-display text-2xl">
+                <strong className="ml-auto shrink-0 font-display text-2xl">
                   {student.score}
                 </strong>
               </div>
@@ -411,7 +408,7 @@ function LeadershipSpotlight() {
           <div>
             <p className="eyebrow">Leadership</p>
             <h2 className="section-title mt-4">
-              Five voices. One shared purpose.
+              Meet our leadership.
             </h2>
           </div>
           <p className="section-copy">
@@ -433,7 +430,7 @@ function LeadershipSpotlight() {
                     : "border-slate-100 bg-white hover:border-slate-200"
                 }`}
               >
-                <img
+                <Image
                   src={item.photo}
                   alt=""
                   loading="lazy"
@@ -460,7 +457,7 @@ function LeadershipSpotlight() {
             delay={80}
             className="relative min-h-[520px] overflow-hidden rounded-[2rem] bg-navy"
           >
-            <img
+            <Image
               key={leader.photo}
               src={leader.photo}
               alt={`${leader.name}, ${leader.role}`}
@@ -497,14 +494,14 @@ function LeadershipSpotlight() {
 }
 
 function CampusMarquee() {
-  const items = [...GALLERY, ...GALLERY]
+  const items = GALLERY
   return (
     <section className="overflow-hidden bg-[#e9f4f2] py-20 lg:py-24">
       <Reveal className="container flex items-end justify-between gap-6">
         <div>
           <p className="eyebrow eyebrow-teal">Life at Sanskar</p>
           <h2 className="section-title mt-4">
-            A school is best understood in motion.
+            See life at Sanskar.
           </h2>
         </div>
         <Link
@@ -514,14 +511,14 @@ function CampusMarquee() {
           Open gallery <Icon name="camera" size={18} />
         </Link>
       </Reveal>
-      <div className="gallery-marquee mt-12 flex gap-4 px-2">
+      <div className="mt-12 flex snap-x gap-4 overflow-x-auto px-4 pb-4" aria-label="Campus photo gallery">
         {items.map((item, index) => (
           <Link
             to="/gallery"
             key={`${item.image}-${index}`}
             className="group relative h-[270px] w-[390px] shrink-0 overflow-hidden rounded-[1.75rem]"
           >
-            <img
+            <Image
               src={item.image}
               alt={index < GALLERY.length ? item.title : ""}
               className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
@@ -579,7 +576,7 @@ function HomeBoards() {
           const isExternal = /^https?:\/\//.test(item.href)
           const content = (
             <>
-              <img
+              <Image
                 src={item.image}
                 alt=""
                 loading="lazy"
@@ -611,7 +608,7 @@ function HomeBoards() {
               key={item.id || item.title}
               href={item.href}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={className}
             >
               {content}
@@ -632,7 +629,7 @@ function HomeBoards() {
 
   return (
     <section className="bg-navy-deep py-20 lg:py-28">
-      <div className="container grid gap-7 lg:grid-cols-2">
+      <div className="container grid grid-cols-1 gap-7 lg:grid-cols-2">
         <Reveal>
           {board(
             "Upcoming programmes",
@@ -702,13 +699,16 @@ function TestimonialCarousel() {
         >
           <div className="flex items-start justify-between gap-6">
             <Icon name="quote" className="text-gold" size={40} />
-            <img
+            {testimonial.image.includes("/images/testimonial/") ? <span aria-hidden="true" className="flex h-24 w-24 items-center justify-center rounded-full bg-[#e9f4f2] text-2xl font-semibold text-teal sm:h-28 sm:w-28">{testimonial.name.split(/\s+/).map(part => part[0]).slice(0, 2).join("")}</span> : <Image
               src={testimonial.image}
               alt={`${testimonial.name}, Sanskar parent`}
+              width={112}
+              height={112}
+              sizes="112px"
               loading="lazy"
               decoding="async"
               className="h-24 w-24 rounded-full border-4 border-[#e9f4f2] bg-slate-100 object-cover shadow-lg sm:h-28 sm:w-28"
-            />
+            />}
           </div>
           <blockquote className="mt-6 font-display text-3xl leading-[1.35] text-navy sm:text-4xl">
             “{testimonial.quote}”
@@ -731,11 +731,9 @@ function TestimonialCarousel() {
 
 export default function Home() {
   usePageMeta({
-    title: "Best CBSE School in Mathura & Vrindavan | Sanskar Public School",
-    description:
-      "Explore Sanskar Public School, a CBSE Senior Secondary school in Mathura serving Mathura–Vrindavan with strong academics, Indian values, sports, labs and admissions for 2026–27.",
-    keywords:
-      "best school in Mathura, best CBSE school in Mathura, top schools in Mathura, CBSE school in Mathura, best school in Vrindavan, CBSE school in Vrindavan, school admission Mathura",
+    title: "Best School in Mathura | Sanskar Public School",
+    description: "Looking for the best school in Mathura? Explore Sanskar Public School for CBSE academics, Indian values, sports and admissions. Book a campus visit.",
+    keywords: "best school in Mathura, best school of Mathura, best CBSE school in Mathura, top 10 schools in Mathura, top 3 schools in Mathura, good schools in Mathura, CBSE school in Mathura, school admission Mathura",
     path: "/",
     image: "/optimized/gallery-campus-slide-3.jpg",
     schema: {
@@ -781,7 +779,7 @@ export default function Home() {
             delay={90}
             className="relative min-h-[560px] overflow-hidden rounded-[2rem]"
           >
-            <img
+            <Image
               src="/optimized/future-ready-learning.jpg"
               alt="Representative collaborative robotics and coding session"
               loading="lazy"
@@ -809,12 +807,12 @@ export default function Home() {
           <Reveal className="text-center">
             <p className="eyebrow">One connected learning journey</p>
             <h2 className="section-title mx-auto mt-4 max-w-4xl">
-              From first discoveries to future decisions.
+              Learning at every stage.
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             <Reveal className="group relative min-h-[510px] overflow-hidden rounded-[2rem]">
-              <img
+              <Image
                 src="/optimized/little-winners-learning.jpg"
                 alt="Representative early-years learning environment"
                 loading="lazy"
@@ -845,7 +843,7 @@ export default function Home() {
               delay={90}
               className="group relative min-h-[510px] overflow-hidden rounded-[2rem]"
             >
-              <img
+              <Image
                 src="/optimized/gallery-campus-slide-3.jpg"
                 alt="Sanskar students conducting a science experiment"
                 loading="lazy"
@@ -882,7 +880,7 @@ export default function Home() {
             <div>
               <p className="eyebrow eyebrow-teal">Everything under one gate</p>
               <h2 className="section-title mt-4">
-                Education is larger than a classroom.
+                Academics, arts and sport.
               </h2>
             </div>
             <p className="section-copy">
@@ -923,7 +921,7 @@ export default function Home() {
                   className="card interactive-card group block h-full overflow-hidden"
                 >
                   <div className="aspect-[4/3] overflow-hidden">
-                    <img
+                    <Image
                       src={card.img}
                       alt={card.t}
                       loading="lazy"
@@ -961,7 +959,7 @@ export default function Home() {
           <Reveal>
             <p className="eyebrow eyebrow-teal">Schools in Mathura–Vrindavan</p>
             <h2 className="section-title mt-4">
-              A CBSE school for every stage of the journey.
+              From early years to Class XII.
             </h2>
             <p className="section-copy mt-5">
               Families comparing CBSE schools in Mathura and Vrindavan can
@@ -1005,7 +1003,7 @@ export default function Home() {
           <div>
             <p className="eyebrow eyebrow-light">Admissions in Mathura</p>
             <h2 className="mt-3 max-w-3xl font-display text-4xl font-semibold leading-tight sm:text-5xl">
-              Come for the campus. Stay for the learning culture.
+              Visit our campus. Meet our team.
             </h2>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
@@ -1015,7 +1013,7 @@ export default function Home() {
             <a
               href={PAYMENT_LINKS.senior}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="button border border-white/25 text-white"
             >
               <Icon name="wallet" size={17} />

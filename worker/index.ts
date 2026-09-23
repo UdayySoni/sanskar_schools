@@ -1,4 +1,7 @@
 import siteConfig from "../site.config.json"
+import renderPage from "../src/entry-server"
+import type { SiteContentValue } from "../src/context/SiteContent"
+import { findPost } from "../src/data/blog"
 import { LEGACY_ROUTES, NON_INDEXABLE, structuredData } from "../src/data/search"
 import { validateUpload } from "./uploads"
 import { contentSchemas } from "./content-validation"
@@ -282,6 +285,7 @@ async function servePage(request: Request, env: Env) {
   headers.set("cache-control", "no-store")
   headers.set("x-content-type-options", "nosniff")
   headers.set("referrer-policy", "strict-origin-when-cross-origin")
+  if (url.protocol === "https:") headers.set("strict-transport-security", "max-age=31536000")
   const noindex = admin || !known || NON_INDEXABLE.includes(pathname)
   if (noindex) headers.set("x-robots-tag", "noindex, nofollow")
   const result = new Response(response.body, { status: known ? response.status : 404, headers })
@@ -292,6 +296,23 @@ async function servePage(request: Request, env: Env) {
     .on('meta[name="robots"]', { element(el) { if (noindex) el.setAttribute("content", "noindex, nofollow") } })
   if (admin) return rewriter.transform(result)
   const content = await getContent(env.DB)
+  const initialContent: Partial<SiteContentValue> = {
+    settings: content.settings as SiteContentValue["settings"],
+    notices: content.notices as SiteContentValue["notices"],
+    programmes: content.programmes as SiteContentValue["programmes"],
+    happenings: content.happenings as SiteContentValue["happenings"],
+    testimonials: content.testimonials as SiteContentValue["testimonials"],
+    sportsArena: content.sportsArena as SiteContentValue["sportsArena"],
+    media: [],
+  }
+  const rendered = await renderPage(pathname, initialContent)
+  rewriter = rewriter.on('#root', { element(el) { el.setInnerContent(rendered, { html: true }) } })
+    .on('head', { element(el) { el.append('<script id="initial-content" type="application/json">' + JSON.stringify(initialContent).replace(/</g, "\\u003c") + '</script>', { html: true }) } })
+  const article = findPost(pathname)
+  const socialImage = siteConfig.url + (article?.image || "/optimized/building01.jpg")
+  rewriter = rewriter.on('meta[property="og:type"]', { element(el) { el.setAttribute("content", article ? "article" : "website") } })
+    .on('meta[property="og:image"], meta[name="twitter:image"]', { element(el) { el.setAttribute("content", socialImage) } })
+  if (pathname !== "/") rewriter = rewriter.on('link[rel="preload"][as="image"]', { element(el) { el.remove() } })
   const seo = content.seo as Record<string, { title?: string; description?: string }>
   const pageSeo = known ? seo[pathname] : { title: "Page not found | Sanskar Public School", description: "The requested page could not be found." }
   if (pageSeo?.title) {

@@ -1,3 +1,4 @@
+import Image from "../components/Image"
 import { Link } from "react-router-dom"
 import Icon from "../components/Icon"
 import PageHero from "../components/PageHero"
@@ -75,14 +76,14 @@ export default function LittleWinners() {
             </div>
           </Reveal>
           <Reveal delay={90} className="grid grid-cols-2 gap-4">
-            <img
+            <Image
               src="/optimized/gallery-campus-slide-4.jpg"
               alt="Young Sanskar learner practising mindfulness"
               loading="lazy"
               decoding="async"
               className="h-[420px] w-full rounded-[2rem] object-cover"
             />
-            <img
+            <Image
               src="/optimized/gallery-campus-slide-8.jpg"
               alt="Young Sanskar students performing at a school event"
               loading="lazy"

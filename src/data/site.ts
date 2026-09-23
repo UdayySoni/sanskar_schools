@@ -255,20 +255,14 @@ export const YOUTUBE_CHANNEL =
 
 export const TOPPERS = {
   XII: [
-    { name: "Mayank Agrawal", score: "95.6%" },
-    { name: "Rashi Saraswat", score: "93.4%" },
-    { name: "Kirty Bhardwaj", score: "91.6%" },
-    { name: "Kuldeep Kumar", score: "90.8%" },
-    { name: "Khushi Kumari", score: "90%" },
+    { name: "Manoj Kumar", score: "93.2%", image: "/optimized/toppers-2025-26/manoj-kumar.webp" },
+    { name: "Sneha Chaudhary", score: "91.8%", image: "/optimized/toppers-2025-26/sneha-chaudhary.webp" },
+    { name: "Jaidev Goyal", score: "90.2%", image: "/optimized/toppers-2025-26/jaidev-goyal.webp" },
   ],
   X: [
-    { name: "Jaidev Goyal", score: "96.8%" },
-    { name: "Sanjana", score: "95%" },
-    { name: "Navya Chaudhary", score: "94.6%" },
-    { name: "Nitin Saini", score: "93.2%" },
-    { name: "Madhuri", score: "92%" },
-    { name: "Sakshi Gautam", score: "91%" },
-    { name: "Manoj Kumar", score: "90.2%" },
+    { name: "Shrestha Sharma", score: "95.2%", image: "/optimized/toppers-2025-26/shrestha-sharma.webp" },
+    { name: "Krishna Kumar", score: "94%", image: "/optimized/toppers-2025-26/krishna-kumar.webp" },
+    { name: "Piyush Kumar Pandey", score: "93.4%", image: "/optimized/toppers-2025-26/piyush-kumar-pandey.webp" },
   ],
 }
 

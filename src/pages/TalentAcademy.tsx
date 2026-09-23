@@ -1,3 +1,4 @@
+import Image from "../components/Image"
 import Icon from "../components/Icon"
 import PageHero from "../components/PageHero"
 import Reveal from "../components/Reveal"
@@ -141,7 +142,7 @@ export default function TalentAcademy() {
                     index === 0 ? "aspect-[16/7]" : "aspect-[16/10]"
                   }`}
                 >
-                  <img
+                  <Image
                     src={programme.image}
                     alt={`${programme.name} facilities and coaching at Sanskar in Mathura`}
                     loading="lazy"
@@ -218,7 +219,7 @@ export default function TalentAcademy() {
             <a
               href={portal}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="button button-gold"
             >
               Open registration portal <Icon name="external" size={17} />
@@ -264,7 +265,7 @@ export default function TalentAcademy() {
           <a
             href={portal}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="button button-gold shrink-0"
           >
             View batches & register <Icon name="external" size={17} />

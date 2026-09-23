@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import Icon from "../components/Icon"
 import PageHero from "../components/PageHero"
 import Reveal from "../components/Reveal"
@@ -120,7 +121,7 @@ export default function Admissions() {
               <label className="text-sm font-semibold text-navy sm:col-span-2">How can we help? <span className="font-normal text-slate-400">(optional)</span><textarea className="field mt-2 !h-auto resize-y" rows={3} value={form.message} onChange={(event) => update("message", event.target.value)} placeholder="Ask about a campus visit, admission, transport, fees or your child’s grade." /></label>
               <label className="sr-only" aria-hidden="true">Company<input tabIndex={-1} autoComplete="off" value={form.company} onChange={(event) => update("company", event.target.value)} /></label>
               {feedback && <div role="status" className={`sm:col-span-2 rounded-2xl px-5 py-4 text-sm font-semibold ${state === "success" ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"}`}>{feedback}</div>}
-              <p className="text-xs leading-5 text-slate-400 sm:col-span-2">By submitting, you agree that Sanskar Public School may contact you about this admission enquiry. Your details are used only for school follow-up.</p>
+              <p className="text-sm leading-6 text-slate-600 sm:col-span-2">By submitting, you agree that Sanskar Public School may contact you about this admission enquiry. <Link to="/privacy" className="text-blue underline">Read our privacy notice.</Link></p>
               <button type="submit" disabled={state === "sending"} className="button button-primary sm:col-span-2 disabled:cursor-wait disabled:opacity-60">{state === "sending" ? "Sending enquiry…" : "Send admission enquiry"}<Icon name={state === "success" ? "check" : "arrow"} size={18} /></button>
             </form>
           </Reveal>
