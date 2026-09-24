@@ -47,6 +47,20 @@ h4, footer h2 { font-size: 1.125rem; }
 .blog-section-title { font-size: clamp(1.25rem, 2vw, 1.5rem); line-height: 1.4; }
 .section-copy { color: #5e6d79; font-size: 1.05rem; line-height: 1.8; }
 
+/* Desktop reading sizes; retain the existing mobile typography and spacing. */
+@media (min-width: 1024px) {
+  main h1, main h1.section-title, main h1.font-display { font-size: clamp(3.5rem, 4.5vw, 3.875rem); }
+  main h2, main .section-title { font-size: 2.25rem; }
+  main h3 { font-size: 1.5rem; }
+  main .blog-card-title { font-size: 1.375rem; }
+  main .blog-section-title { font-size: 1.75rem; }
+  main p:where(:not([class*="text-"]):not(.eyebrow):not(.section-copy)),
+  main p.leading-8:where(:not(.text-lg):not(.section-copy)),
+  main p.text-sm, main p.text-base { font-size: 1.125rem; line-height: 1.8; }
+  main .section-copy { font-size: 1.1875rem; line-height: 1.8; }
+  main p.text-lg { font-size: 1.375rem; line-height: 1.65; }
+}
+
 .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: .6rem; border-radius: 999px; padding: .82rem 1.25rem; font-size: .9rem; font-weight: 700; line-height: 1; transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease; }
 .button:hover { transform: translateY(-2px); }
 .button-primary { background: #082b4f; color: white; box-shadow: 0 10px 28px rgba(8,43,79,.18); }
