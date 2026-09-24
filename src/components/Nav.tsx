@@ -40,13 +40,13 @@ export default function Nav() {
   }, [])
 
   const itemClass = ({ isActive }: { isActive: boolean }) =>
-    `rounded-full px-2.5 py-2 text-[11px] font-semibold transition-colors ${
+    `whitespace-nowrap rounded-full px-2 py-2 text-sm font-semibold transition-colors 2xl:px-2.5 2xl:text-[15px] ${
       isActive
         ? "bg-navy text-white"
         : "text-slate-600 hover:bg-slate-100 hover:text-navy"
     }`
   const mobileClass = ({ isActive }: { isActive: boolean }) =>
-    `flex items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold ${
+    `flex items-center justify-between rounded-xl px-4 py-3 text-base font-semibold ${
       isActive ? "bg-navy text-white" : "text-slate-700 hover:bg-slate-50"
     }`
 
@@ -59,7 +59,7 @@ export default function Nav() {
       }`}
     >
       <div className="hidden h-8 bg-navy-deep text-white lg:block">
-        <div className="container flex h-full items-center justify-between text-[11px] font-semibold">
+        <div className="container flex h-full items-center justify-between text-xs font-semibold">
           <span className="tracking-wide text-white/70">
             {settings.announcement}
           </span>
@@ -92,7 +92,7 @@ export default function Nav() {
             alt="Sanskar Public School"
             loading="eager"
             sizes="230px"
-            className="h-10 w-auto max-w-[145px] object-contain sm:h-[52px] sm:max-w-[230px]"
+            className="h-10 w-auto max-w-[145px] object-contain sm:h-[52px] sm:max-w-[230px] xl:max-w-[200px] 2xl:max-w-[230px]"
           />
         </Link>
         <nav
@@ -107,7 +107,7 @@ export default function Nav() {
         </nav>
         <LanguageSwitcher />
         <div className="hidden items-center gap-3 xl:flex">
-          <div className="flex items-start gap-1.5 text-[11px] font-semibold leading-4 text-navy">
+          <div className="hidden items-start gap-1.5 whitespace-nowrap text-sm font-semibold leading-5 text-navy 2xl:flex">
             <Icon name="phone" size={15} className="mt-0.5" />
             <span className="flex flex-col">
               <a href="tel:+917535938481" className="hover:text-blue">
@@ -120,7 +120,7 @@ export default function Nav() {
           </div>
           <Link
             to="/admissions#enquiry"
-            className="button button-gold !min-h-11 !px-4"
+            className="button button-gold whitespace-nowrap !min-h-11 !px-4"
           >
             Book a visit
           </Link>

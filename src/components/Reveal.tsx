@@ -15,6 +15,10 @@ export default function Reveal({
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setVisible(true);
+      return;
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -22,7 +26,7 @@ export default function Reveal({
           observer.unobserve(node);
         }
       },
-      { threshold: 0.12 },
+      { threshold: 0.05 },
     );
     observer.observe(node);
     return () => observer.disconnect();
@@ -32,7 +36,7 @@ export default function Reveal({
     <div
       ref={ref}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ animationDelay: `${delay}ms` }}
     >
       {children}
     </div>

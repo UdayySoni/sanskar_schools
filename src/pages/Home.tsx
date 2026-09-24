@@ -122,7 +122,7 @@ function HeroCarousel() {
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    if (paused) return
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     timer.current = setInterval(
       () => setCurrent((value) => (value + 1) % HERO_SLIDES.length),
       5200,
@@ -150,7 +150,7 @@ function HeroCarousel() {
           fetchPriority={index === 0 ? "high" : "auto"}
           loading="eager"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[1400ms]"
+          className="hero-slide absolute inset-0 h-full w-full object-cover"
           style={{
             opacity: current === index ? 1 : 0,
             transform: current === index ? "scale(1.02)" : "scale(1.08)",
@@ -465,7 +465,7 @@ function LeadershipSpotlight() {
               className="absolute inset-y-0 left-0 h-full w-full object-cover object-top opacity-40 sm:w-[48%] sm:opacity-100"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/65 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:via-navy/85 sm:to-navy" />
-            <div className="relative ml-auto flex min-h-[520px] w-full flex-col justify-center p-8 text-white sm:w-[58%] sm:p-10">
+            <div key={leader.name} className="content-transition relative ml-auto flex min-h-[520px] w-full flex-col justify-center p-8 text-white sm:w-[58%] sm:p-10">
               <Icon name="quote" className="text-gold" size={36} />
               <p className="mt-6 font-display text-2xl leading-9">
                 “{leaderExcerpt(leader.message, 220)}”
@@ -693,6 +693,7 @@ function TestimonialCarousel() {
           </div>
         </Reveal>
         <Reveal
+          key={current}
           delay={90}
           className="rounded-[2rem] bg-white p-8 shadow-[0_24px_70px_rgba(8,43,79,.08)] sm:p-12"
         >

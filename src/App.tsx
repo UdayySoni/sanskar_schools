@@ -37,13 +37,24 @@ const TalentAcademy = lazy(() => import("./pages/TalentAcademy"))
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
   useEffect(() => {
-    if (hash)
-      window.setTimeout(
-        () =>
-          document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" }),
-        80,
-      )
-    else window.scrollTo(0, 0)
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" })
+      return
+    }
+    let id: string
+    try { id = decodeURIComponent(hash.slice(1)) } catch { return }
+    const scrollToTarget = () => {
+      const target = document.getElementById(id)
+      if (!target) return false
+      target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" })
+      return true
+    }
+    if (scrollToTarget()) return
+    const observer = new MutationObserver(() => {
+      if (scrollToTarget()) observer.disconnect()
+    })
+    observer.observe(document.querySelector("main") || document.body, { childList: true, subtree: true })
+    return () => observer.disconnect()
   }, [pathname, hash])
   return null
 }
@@ -108,42 +119,44 @@ export function AppRoutes({ initialContent }: { initialContent?: Partial<SiteCon
   return (
     <SiteContentProvider initialContent={initialContent}>
       <LanguageProvider>
-        <ScrollToTop />
         <Nav />
         <main>
           <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogArticle />} />
-              <Route path="/privacy" element={<Policy />} />
-              <Route path="/website-terms" element={<Policy />} />
-              <Route path="/editorial-policy" element={<Policy />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/academics" element={<Academics />} />
-              <Route path="/little-winners" element={<LittleWinners />} />
-              <Route path="/infrastructure" element={<Infrastructure />} />
-              <Route path="/talent-academy" element={<TalentAcademy />} />
-              <Route path="/sports-arena" element={<SportsArena />} />
-              <Route path="/admissions" element={<Admissions />} />
-              <Route path="/achievements" element={<Achievements />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/notices" element={<Notices />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/pay-fee" element={<PayFee />} />
-              <Route path="/leadership/:leaderId" element={<LeaderMessage />} />
-              <Route
-                path="/virtual-tour"
-                element={
-                  <ComingSoon
-                    title="Virtual Tour"
-                    subtitle="An immersive campus walkthrough is being prepared. Until then, book a personal visit and experience Sanskar in person."
-                    path="/virtual-tour"
-                  />
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <div key={pathname} className="page-transition">
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogArticle />} />
+                <Route path="/privacy" element={<Policy />} />
+                <Route path="/website-terms" element={<Policy />} />
+                <Route path="/editorial-policy" element={<Policy />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/academics" element={<Academics />} />
+                <Route path="/little-winners" element={<LittleWinners />} />
+                <Route path="/infrastructure" element={<Infrastructure />} />
+                <Route path="/talent-academy" element={<TalentAcademy />} />
+                <Route path="/sports-arena" element={<SportsArena />} />
+                <Route path="/admissions" element={<Admissions />} />
+                <Route path="/achievements" element={<Achievements />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/notices" element={<Notices />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/pay-fee" element={<PayFee />} />
+                <Route path="/leadership/:leaderId" element={<LeaderMessage />} />
+                <Route
+                  path="/virtual-tour"
+                  element={
+                    <ComingSoon
+                      title="Virtual Tour"
+                      subtitle="An immersive campus walkthrough is being prepared. Until then, book a personal visit and experience Sanskar in person."
+                      path="/virtual-tour"
+                    />
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
           </Suspense>
         </main>
         <Footer />

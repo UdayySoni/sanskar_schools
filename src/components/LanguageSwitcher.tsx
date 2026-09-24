@@ -6,7 +6,7 @@ export default function LanguageSwitcher() {
   return (
     <div className="relative shrink-0">
       <div
-        className="flex rounded-full border border-navy/15 bg-slate-100 p-1 text-[11px] font-bold shadow-sm"
+        className="flex rounded-full border border-navy/15 bg-slate-100 p-1 text-xs font-bold shadow-sm"
         role="group"
         aria-label="Choose website language"
       >
