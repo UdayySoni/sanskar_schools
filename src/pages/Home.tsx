@@ -1,3 +1,4 @@
+import { HOME_FAQS } from "../data/faqs"
 import Image from "../components/Image"
 import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
@@ -94,25 +95,6 @@ const HERO_SLIDES = [
     label: "Sport within the school day",
     position: "center",
   },
-]
-
-const LOCAL_FAQS = [
-  [
-    "Is Sanskar Public School CBSE affiliated?",
-    "Yes. Sanskar Public School is a CBSE-affiliated Senior Secondary school in Mathura. The affiliation number is 2132432.",
-  ],
-  [
-    "Which classes and streams are available?",
-    "The learning journey begins with Sanskar Li’l Winners and continues through Class XII, with Science, Commerce and Humanities at Senior Secondary level.",
-  ],
-  [
-    "Where is the school located?",
-    "The campus is in Industrial Area, Site-A, Maholi Road, Mathura, with convenient road access for families across Mathura and the wider Vrindavan area.",
-  ],
-  [
-    "How can parents start an admission enquiry?",
-    "Complete the secure online form, call the school or book a campus visit. The admissions team will explain availability, documents and the next interaction.",
-  ],
 ]
 
 function HeroCarousel() {
@@ -736,15 +718,6 @@ export default function Home() {
     keywords: "best school in Mathura, best school of Mathura, best CBSE school in Mathura, top 10 schools in Mathura, top 3 schools in Mathura, good schools in Mathura, CBSE school in Mathura, school admission Mathura",
     path: "/",
     image: "/optimized/gallery-campus-slide-3.jpg",
-    schema: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: LOCAL_FAQS.map(([question, answer]) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: { "@type": "Answer", text: answer },
-      })),
-    },
   })
 
   return (
@@ -976,7 +949,7 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={80} className="space-y-3">
-            {LOCAL_FAQS.map(([question, answer]) => (
+            {HOME_FAQS.map(([question, answer]) => (
               <details
                 key={question}
                 className="group rounded-2xl border border-slate-200 bg-cream px-6 py-5"

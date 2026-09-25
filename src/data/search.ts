@@ -2,13 +2,16 @@ import site from "../../site.config.json"
 import metadata from "../../seo.config.json"
 import { BLOG_POSTS, blogPath, findPost } from "./blog"
 import { POLICIES } from "./policies"
+import { HOME_FAQS, ADMISSIONS_FAQS } from "./faqs"
+import schoolProfile from "./school-profile.json"
 
 export const PAGE_SEO: Record<string, { title: string; description: string }> = {
   ...metadata,
   ...Object.fromEntries(Object.entries(POLICIES).map(([path, policy]) => [path, { title: `${policy.title} | Sanskar Public School`, description: policy.description }])),
   ...Object.fromEntries(BLOG_POSTS.map(post => [blogPath(post), { title: post.seoTitle, description: post.description }])),
 }
-export const AFFILIATION_URL = "https://saras.cbse.gov.in/SARAS/AffiliatedList/AfflicationDetails/2132432"
+export const AFFILIATION_URL = schoolProfile.affiliationUrl
+export const PAGE_FAQS: Record<string, string[][]> = { "/": HOME_FAQS, "/admissions": ADMISSIONS_FAQS }
 export const NON_INDEXABLE = site.nonIndexableRoutes
 export const LEGACY_ROUTES: Record<string, string> = {
   "/admission": "/admissions",
@@ -27,17 +30,18 @@ export function structuredData(path: string, title: string, description: string,
     alternateName: "Sanskar Public School Mathura", url: base + "/",
     logo: base + "/optimized/logo-circle.png", image: base + "/optimized/building01.jpg",
     description: "CBSE Senior Secondary school on Maholi Road in Mathura, Uttar Pradesh.",
-    telephone: [settings.primaryPhone || "75359 38481", settings.secondaryPhone || "90125 39208"],
-    email: settings.email || "sanskarschool2009@gmail.com",
+    telephone: [settings.primaryPhone || schoolProfile.primaryPhone, settings.secondaryPhone || schoolProfile.secondaryPhone],
+    email: settings.email || schoolProfile.email,
     address: { "@type": "PostalAddress", streetAddress: settings.address || "Industrial Area, Site-A, Maholi Road", addressLocality: "Mathura", addressRegion: "Uttar Pradesh", postalCode: "281004", addressCountry: "IN" },
     sameAs: [AFFILIATION_URL, "https://www.linkedin.com/company/sanskar-school-mathura", "https://www.youtube.com/@sanskarpublicschoolmathura4604"],
     identifier: { "@type": "PropertyValue", propertyID: "CBSE affiliation number", value: "2132432" },
   }
   const graph: Record<string, unknown>[] = [school,
     { "@type": "WebSite", "@id": websiteId, url: base + "/", name: "Sanskar Public School Mathura", publisher: { "@id": schoolId }, inLanguage: "en-IN" },
-    { "@type": path === "/contact" ? "ContactPage" : path === "/about" ? "AboutPage" : path === "/blog" ? "CollectionPage" : "WebPage",
+    { "@type": PAGE_FAQS[path] ? "FAQPage" : path === "/contact" ? "ContactPage" : path === "/about" ? "AboutPage" : path === "/blog" ? "CollectionPage" : "WebPage",
       "@id": url + "#webpage", url, name: title, description, inLanguage: "en-IN",
       isPartOf: { "@id": websiteId }, about: { "@id": schoolId },
+      ...(PAGE_FAQS[path] ? { mainEntity: PAGE_FAQS[path].map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) } : {}),
       ...(path !== "/" ? { breadcrumb: { "@id": url + "#breadcrumb" } } : {}),
     },
   ]

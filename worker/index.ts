@@ -2,7 +2,9 @@ import siteConfig from "../site.config.json"
 import renderPage from "../src/entry-server"
 import type { SiteContentValue } from "../src/context/SiteContent"
 import { findPost } from "../src/data/blog"
-import { LEGACY_ROUTES, NON_INDEXABLE, structuredData } from "../src/data/search"
+import { LEGACY_ROUTES, NON_INDEXABLE, PAGE_FAQS, structuredData } from "../src/data/search"
+import { robotsText, sitemapXml, llmsText } from "../src/data/search-files"
+import schoolProfile from "../src/data/school-profile.json"
 import { validateUpload } from "./uploads"
 import { contentSchemas } from "./content-validation"
 import { z } from "zod"
@@ -263,16 +265,23 @@ async function servePage(request: Request, env: Env) {
   if (siteConfig.alternateHosts.includes(url.hostname) || (url.hostname === canonicalHost && url.protocol !== "https:")) {
     return Response.redirect(siteConfig.url + url.pathname + url.search, 308)
   }
+  if (!["GET", "HEAD"].includes(request.method)) return new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } })
   if (pathname === "/robots.txt") return new Response(
-    "User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: " + siteConfig.url + "/sitemap.xml\n",
+    request.method === "HEAD" ? null : robotsText(siteConfig),
     { headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=3600" } },
   )
   if (pathname === "/sitemap.xml") return new Response(
-    '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +
-      siteConfig.routes.filter(path => !NON_INDEXABLE.includes(path)).map(path => "<url><loc>" + escapeHtml(siteConfig.url + path) + "</loc></url>").join("") + "</urlset>",
+    request.method === "HEAD" ? null : sitemapXml(siteConfig),
     { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" } },
   )
-  if (!["GET", "HEAD"].includes(request.method)) return new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } })
+  if (pathname === "/llms.txt" || pathname === "/llms-full.txt") {
+    const content = await getContent(env.DB)
+    const settings = content.settings as SiteContentValue["settings"]
+    const profile = { ...schoolProfile, primaryPhone: settings.primaryPhone, secondaryPhone: settings.secondaryPhone, email: settings.email, address: settings.address }
+    return new Response(request.method === "HEAD" ? null : llmsText(siteConfig, profile, content.seo as Record<string, { title: string; description: string }>, PAGE_FAQS, pathname === "/llms-full.txt"), {
+      headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "public, max-age=300", "x-content-type-options": "nosniff" },
+    })
+  }
   const admin = pathname === "/admin" || pathname.startsWith("/admin/")
   const known = siteConfig.routes.includes(pathname) || admin
   // Always fetch the shell for application routes; nested routes need no copied index files.

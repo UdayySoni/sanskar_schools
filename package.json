@@ -6,7 +6,7 @@
   "scripts": {
     "images:optimize": "node scripts/optimize-images.mjs",
     "dev": "vite --host 0.0.0.0",
-    "build": "node scripts/generate-search-files.mjs && node scripts/clean-dist.mjs && vite build && node scripts/sanitize-build.mjs",
+    "build": "node --experimental-strip-types scripts/generate-search-files.mjs && node scripts/clean-dist.mjs && vite build && node scripts/sanitize-build.mjs",
     "preview": "vite preview",
     "format": "oxfmt",
     "db:generate": "drizzle-kit generate",

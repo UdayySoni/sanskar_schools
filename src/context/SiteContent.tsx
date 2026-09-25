@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { NOTICES } from "../data/site"
+import schoolProfile from "../data/school-profile.json"
 
 export type EditableNotice = {
   id?: string
@@ -82,10 +83,10 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   heroCopy:
     "CBSE academics, Indian values, arts and sport for children from Mathura and Vrindavan. A place to learn, ask questions and grow with confidence.",
   heroImage: "/optimized/building01.jpg",
-  primaryPhone: "75359 38481",
-  secondaryPhone: "90125 39208",
-  email: "sanskarschool2009@gmail.com",
-  address: "Industrial Area, Site-A, Maholi Road, Mathura, Uttar Pradesh 281004",
+  primaryPhone: schoolProfile.primaryPhone,
+  secondaryPhone: schoolProfile.secondaryPhone,
+  email: schoolProfile.email,
+  address: schoolProfile.address,
 }
 
 export const DEFAULT_PROGRAMMES: BoardItem[] = [

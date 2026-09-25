@@ -149,6 +149,44 @@ test("production Worker: routes, authentication, content, D1, R2 and failed emai
     assert.match(article, /mathura.nic.in/)
     assert.equal((await request("/llms.txt")).status, 200)
   })
+  await t.test("AI discovery files and FAQ markup match public content without JavaScript", async () => {
+    const site = JSON.parse(readFileSync("site.config.json", "utf8"))
+    for (const path of ["/robots.txt", "/sitemap.xml", "/llms.txt", "/llms-full.txt"]) {
+      const response = await request(path)
+      assert.equal(response.status, 200)
+      assert.match(response.headers.get("content-type"), path.endsWith(".xml") ? /application\/xml/ : /text\/plain/)
+      const body = await response.text()
+      assert.equal(body, readFileSync("public" + path, "utf8"), "build and Worker agree: " + path)
+      const head = await request(path, { method: "HEAD" })
+      assert.equal(head.status, 200)
+      assert.equal(await head.text(), "")
+      assert.equal((await request(path, { method: "POST" })).status, 405)
+      if (path.startsWith("/llms")) {
+        assert.ok(!body.includes("<html") && !body.includes("/api/"))
+        for (const route of site.routes.filter(route => !site.nonIndexableRoutes.includes(route))) assert.ok(body.includes(site.url + route), route)
+        for (const route of site.nonIndexableRoutes) assert.ok(!body.includes(site.url + route), route)
+      }
+    }
+    const reference = await (await request("/llms-full.txt")).text()
+    for (const path of ["/", "/admissions"]) {
+      const html = await (await request(path)).text()
+      const graph = JSON.parse(html.match(/<script id="site-schema" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])["@graph"]
+      const faq = graph.filter(node => node["@type"] === "FAQPage")
+      assert.equal(faq.length, 1)
+      assert.equal(faq[0]["@id"], site.url + path + "#webpage")
+      const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "").replace(/<[^>]*>/g, "").replaceAll("&amp;", "&").replaceAll("&#x27;", "'").replaceAll("&quot;", '"')
+      for (const question of faq[0].mainEntity) {
+        assert.ok(visible.includes(question.name), question.name)
+        assert.ok(visible.includes(question.acceptedAnswer.text), question.name)
+        assert.ok(reference.includes(question.acceptedAnswer.text), question.name)
+      }
+      for (const agent of ["Googlebot", "bingbot", "OAI-SearchBot", "PerplexityBot"]) {
+        const response = await request(path, { headers: { "user-agent": agent } })
+        assert.equal(response.status, 200)
+        assert.equal(await response.text(), html, "same public content for " + agent)
+      }
+    }
+  })
   await t.test("unauthenticated access, CSRF, login, session and replay after logout", async () => {
     assert.equal((await request("/api/admin/dashboard")).status, 401)
     assert.equal((await json("/api/auth/login", "POST", { username: "test-owner", password: "incorrect-password" })).status, 401)
@@ -173,6 +211,17 @@ test("production Worker: routes, authentication, content, D1, R2 and failed emai
     const html = await (await request("/about")).text()
     assert.match(html, /A &lt;title&gt;/)
     assert.match(html, /Updated description/)
+    for (const path of ["/llms.txt", "/llms-full.txt"]) {
+      const text = await (await request(path)).text()
+      assert.match(text, /Updated description/)
+    }
+    assert.equal((await json("/api/admin/content/settings", "PUT", { primaryPhone: "98765 43210", email: "office@example.invalid" })).status, 200)
+    for (const path of ["/llms.txt", "/llms-full.txt"]) {
+      const text = await (await request(path)).text()
+      assert.match(text, /98765 43210/)
+      assert.match(text, /office@example.invalid/)
+      assert.ok(!text.includes("sanskarschool2009@gmail.com"))
+    }
   })
   const upload = async (name, type, bytes) => {
     const form = new FormData()
