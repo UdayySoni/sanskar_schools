@@ -5,4 +5,6 @@ interface Env extends Pick<CloudflareBindings, "DB" | "FILES" | "ASSETS"> {
   RESEND_API_KEY?: string
   EMAIL_FROM?: string
   LEAD_NOTIFY_TO?: string
+  INSTAGRAM_USER_ID?: string
+  INSTAGRAM_ACCESS_TOKEN?: string
 }

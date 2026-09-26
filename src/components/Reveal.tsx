@@ -26,7 +26,7 @@ export default function Reveal({
           observer.unobserve(node);
         }
       },
-      { threshold: 0.05 },
+      { threshold: 0, rootMargin: "80px 0px" },
     );
     observer.observe(node);
     return () => observer.disconnect();
@@ -36,7 +36,7 @@ export default function Reveal({
     <div
       ref={ref}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
-      style={{ animationDelay: `${delay}ms` }}
+      style={{ animationDelay: `${Math.min(delay, 150)}ms` }}
     >
       {children}
     </div>

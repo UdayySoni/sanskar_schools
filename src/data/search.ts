@@ -4,6 +4,7 @@ import { BLOG_POSTS, blogPath, findPost } from "./blog"
 import { POLICIES } from "./policies"
 import { HOME_FAQS, ADMISSIONS_FAQS } from "./faqs"
 import schoolProfile from "./school-profile.json"
+import { SOCIAL_LINKS } from "./social"
 
 export const PAGE_SEO: Record<string, { title: string; description: string }> = {
   ...metadata,
@@ -33,7 +34,7 @@ export function structuredData(path: string, title: string, description: string,
     telephone: [settings.primaryPhone || schoolProfile.primaryPhone, settings.secondaryPhone || schoolProfile.secondaryPhone],
     email: settings.email || schoolProfile.email,
     address: { "@type": "PostalAddress", streetAddress: settings.address || "Industrial Area, Site-A, Maholi Road", addressLocality: "Mathura", addressRegion: "Uttar Pradesh", postalCode: "281004", addressCountry: "IN" },
-    sameAs: [AFFILIATION_URL, "https://www.linkedin.com/company/sanskar-school-mathura", "https://www.youtube.com/@sanskarpublicschoolmathura4604"],
+    sameAs: [AFFILIATION_URL, ...SOCIAL_LINKS.map(social => social.url)],
     identifier: { "@type": "PropertyValue", propertyID: "CBSE affiliation number", value: "2132432" },
   }
   const graph: Record<string, unknown>[] = [school,

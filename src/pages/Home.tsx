@@ -14,6 +14,8 @@ import {
   TOPPERS,
 } from "../data/site"
 import { usePageMeta } from "../hooks/usePageMeta"
+import useInView from "../hooks/useInView"
+import InstagramReels from "../components/InstagramReels"
 
 export const LEADERSHIP = [
   {
@@ -101,18 +103,26 @@ function HeroCarousel() {
   const { settings } = useSiteContent()
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
+  // Keep the first image mounted even when it loads before React hydrates.
+  const [loaded, setLoaded] = useState<number[]>([0])
+  const [displayed, setDisplayed] = useState(0)
+  const { ref: heroRef, inView } = useInView<HTMLElement>()
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    if (paused || !inView || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     timer.current = setInterval(
-      () => setCurrent((value) => (value + 1) % HERO_SLIDES.length),
-      5200,
+      () => { if (!document.hidden) setCurrent((value) => (value + 1) % HERO_SLIDES.length) },
+      6500,
     )
     return () => {
       if (timer.current) clearInterval(timer.current)
     }
-  }, [paused])
+  }, [paused, inView])
+
+  useEffect(() => {
+    if (loaded.includes(current)) setDisplayed(current)
+  }, [current, loaded])
 
   const go = (index: number) =>
     setCurrent((index + HERO_SLIDES.length) % HERO_SLIDES.length)
@@ -120,22 +130,26 @@ function HeroCarousel() {
   return (
     <section
       className="relative min-h-[780px] overflow-hidden bg-navy-deep pt-[108px] lg:min-h-[860px]"
+      ref={heroRef}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false) }}
     >
-      {HERO_SLIDES.map((slide, index) => current === index && (
+      {HERO_SLIDES.map((slide, index) => (current === index || loaded.includes(index)) && (
         <Image
           key={slide.image}
           src={index === 0 ? settings.heroImage : slide.image}
-          alt={slide.label}
+          alt={displayed === index ? slide.label : ""}
+          aria-hidden={displayed !== index}
+          onLoad={() => setLoaded((previous) => previous.includes(index) ? previous : [...previous, index])}
           sizes="100vw"
           fetchPriority={index === 0 ? "high" : "auto"}
           loading="eager"
           decoding="async"
           className="hero-slide absolute inset-0 h-full w-full object-cover"
           style={{
-            opacity: current === index ? 1 : 0,
-            transform: current === index ? "scale(1.02)" : "scale(1.08)",
+            opacity: displayed === index ? 1 : 0,
             objectPosition: slide.position,
           }}
         />
@@ -644,16 +658,16 @@ function TestimonialCarousel() {
 
   const testimonial = testimonials[Math.min(current, testimonials.length - 1)]
   return (
-    <section className="bg-[#e9f4f2] py-20 lg:py-24">
-      <div className="container grid items-center gap-10 lg:grid-cols-[.75fr_1.25fr]">
+    <section className="parent-voices bg-[#e9f4f2] py-10 lg:py-12">
+      <div className="container grid items-center gap-6 lg:grid-cols-[.75fr_1.25fr] lg:gap-10">
         <Reveal>
           <p className="eyebrow eyebrow-teal">Parent voices</p>
-          <h2 className="section-title mt-4">What families notice.</h2>
-          <p className="section-copy mt-5">
+          <h2 className="section-title mt-3">What families notice.</h2>
+          <p className="section-copy mt-3">
             Real confidence is built through a partnership between school and
             home.
           </p>
-          <div className="mt-7 flex gap-2">
+          <div className="mt-4 flex gap-2">
             <button
               onClick={() =>
                 setCurrent(
@@ -676,26 +690,25 @@ function TestimonialCarousel() {
         </Reveal>
         <Reveal
           key={current}
-          delay={90}
-          className="rounded-[2rem] bg-white p-8 shadow-[0_24px_70px_rgba(8,43,79,.08)] sm:p-12"
+          className="rounded-2xl bg-white p-5 shadow-[0_12px_35px_rgba(8,43,79,.06)] sm:p-6"
         >
           <div className="flex items-start justify-between gap-6">
-            <Icon name="quote" className="text-gold" size={40} />
-            {testimonial.image.includes("/images/testimonial/") ? <span aria-hidden="true" className="flex h-24 w-24 items-center justify-center rounded-full bg-[#e9f4f2] text-2xl font-semibold text-teal sm:h-28 sm:w-28">{testimonial.name.split(/\s+/).map(part => part[0]).slice(0, 2).join("")}</span> : <Image
+            <Icon name="quote" className="text-gold" size={26} />
+            {testimonial.image.includes("/images/testimonial/") ? <span aria-hidden="true" className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e9f4f2] text-sm font-semibold text-teal">{testimonial.name.split(/\s+/).map(part => part[0]).slice(0, 2).join("")}</span> : <Image
               src={testimonial.image}
               alt={`${testimonial.name}, Sanskar parent`}
-              width={112}
-              height={112}
-              sizes="112px"
+              width={48}
+              height={48}
+              sizes="48px"
               loading="lazy"
               decoding="async"
-              className="h-24 w-24 rounded-full border-4 border-[#e9f4f2] bg-slate-100 object-cover shadow-lg sm:h-28 sm:w-28"
+              className="h-12 w-12 rounded-full border-2 border-[#e9f4f2] bg-slate-100 object-cover"
             />}
           </div>
-          <blockquote className="mt-6 font-display text-3xl leading-[1.35] text-navy sm:text-4xl">
+          <blockquote aria-live="polite" className="mt-3 text-base leading-relaxed text-navy sm:text-lg">
             “{testimonial.quote}”
           </blockquote>
-          <div className="mt-8 flex items-center gap-4">
+          <div className="mt-4 flex items-center gap-4">
             <div>
               <strong className="block text-sm text-navy">
                 {testimonial.name}
@@ -925,6 +938,7 @@ export default function Home() {
       <HomeBoards />
 
       <TestimonialCarousel />
+      <InstagramReels />
 
       <section className="bg-white py-20 lg:py-28">
         <div className="container grid gap-12 lg:grid-cols-[.8fr_1.2fr]">

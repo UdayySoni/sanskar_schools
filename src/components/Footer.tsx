@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { useSiteContent } from "../context/SiteContent"
 import { STA_PORTAL } from "../data/site"
 import Icon from "./Icon"
+import SocialIcon from "./SocialIcon"
+import { SOCIAL_LINKS } from "../data/social"
 
 const quickLinks = [
   ["About Sanskar", "/about"],
@@ -23,6 +25,7 @@ export default function Footer() {
     <footer className="bg-navy-deep text-white">
       <div className="container grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.15fr_.7fr_.7fr_1.15fr] lg:gap-12">
         <div>
+          <Link to="/" aria-label="Sanskar Public School home" className="inline-block">
           <Image
             src="/logo.png"
             alt="Sanskar Public School"
@@ -30,6 +33,10 @@ export default function Footer() {
             decoding="async"
             className="h-16 w-auto rounded-lg bg-white px-3 py-2"
           />
+          </Link>
+          <nav aria-label="School social media" className="mt-5 flex gap-3">
+            {SOCIAL_LINKS.map(social => <a key={social.icon} href={social.url} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={`Sanskar on ${social.name}`} title={social.name}><SocialIcon name={social.icon} /></a>)}
+          </nav>
           <p className="mt-6 max-w-md font-display text-2xl leading-8 text-gold">
             {settings.tagline}
           </p>
@@ -141,8 +148,6 @@ export default function Footer() {
         <Link to="/privacy" className="hover:text-gold">Privacy notice</Link>
         <Link to="/website-terms" className="hover:text-gold">Website terms</Link>
         <Link to="/editorial-policy" className="hover:text-gold">Editorial policy</Link>
-        <a href="https://www.youtube.com/@sanskarpublicschoolmathura4604" target="_blank" rel="noopener noreferrer" className="hover:text-gold">Sanskar on YouTube</a>
-        <a href="https://www.linkedin.com/company/sanskar-school-mathura" target="_blank" rel="noopener noreferrer" className="hover:text-gold">Sanskar on LinkedIn</a>
       </div>
       <div className="border-t border-white/10">
         <div className="container flex flex-col gap-3 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">

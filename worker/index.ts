@@ -9,6 +9,7 @@ import { validateUpload } from "./uploads"
 import { contentSchemas } from "./content-validation"
 import { z } from "zod"
 import { PUBLIC_CONTENT_DEFAULTS } from "./defaults"
+import { instagramResponse, syncInstagram } from "./instagram"
 
 const LEAD_NOTIFY_TO = "sanskarschool2009@gmail.com"
 const SESSION_COOKIE = "sanskar_admin"
@@ -926,6 +927,7 @@ async function route(request: Request, env: Env, context: ExecutionContext) {
     await env.DB.prepare("SELECT key FROM content LIMIT 1").all()
     return json({ ok: true })
   }
+  if (path === "/api/instagram/reels" && request.method === "GET") return instagramResponse(env)
   if (path === "/api/content" && request.method === "GET") {
     return json({ ok: true, content: await getContent(env.DB) }, 200, {
       "cache-control": "no-store",
@@ -994,6 +996,9 @@ async function route(request: Request, env: Env, context: ExecutionContext) {
 }
 
 export default {
+  async scheduled(_controller, env) {
+    await syncInstagram(env)
+  },
   fetch(request, env, context) {
     return route(request, env, context).catch((caughtError) => {
       console.error("Unhandled API error", caughtError instanceof Error ? caughtError.name : "UnknownError")
